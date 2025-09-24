@@ -1,0 +1,1166 @@
+fileFormatVersion: 2
+guid: e07002359315f894fa185cfa5be09bc3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7336394034894209819
+    second: Shiba 1_0
+  - first:
+      213: 5026919598382090140
+    second: Shiba 1_1
+  - first:
+      213: 664829808446978195
+    second: Shiba 1_2
+  - first:
+      213: -6946362428511943558
+    second: Shiba 1_3
+  - first:
+      213: 7618149005331154689
+    second: Shiba 1_4
+  - first:
+      213: -7141481721807218817
+    second: Shiba 1_5
+  - first:
+      213: -5879659571034456361
+    second: Shiba 1_6
+  - first:
+      213: -6221020166776060052
+    second: Shiba 1_7
+  - first:
+      213: 6105651337684830846
+    second: Shiba 1_8
+  - first:
+      213: 2756490440142208589
+    second: Shiba 1_9
+  - first:
+      213: -9111142268992431830
+    second: Shiba 1_10
+  - first:
+      213: -5340655676611537355
+    second: Shiba 1_11
+  - first:
+      213: -5287168834749883811
+    second: Shiba 1_12
+  - first:
+      213: -6015499312120059695
+    second: Shiba 1_13
+  - first:
+      213: -8710587351090030025
+    second: Shiba 1_14
+  - first:
+      213: 3104092276356139791
+    second: Shiba 1_15
+  - first:
+      213: -8054059226800681463
+    second: Shiba 1_16
+  - first:
+      213: 5452178633380103862
+    second: Shiba 1_17
+  - first:
+      213: -5762502799919056755
+    second: Shiba 1_18
+  - first:
+      213: 1347581457613164321
+    second: Shiba 1_19
+  - first:
+      213: 4388649058647000135
+    second: Shiba 1_20
+  - first:
+      213: -5300875339515530653
+    second: Shiba 1_21
+  - first:
+      213: 6186071907237853131
+    second: Shiba 1_22
+  - first:
+      213: -4190214796768233716
+    second: Shiba 1_23
+  - first:
+      213: 2162934144350560649
+    second: Shiba 1_24
+  - first:
+      213: -4126325204795530216
+    second: Shiba 1_25
+  - first:
+      213: -2312025744958881688
+    second: Shiba 1_26
+  - first:
+      213: 2016115650309836024
+    second: Shiba 1_27
+  - first:
+      213: -97655701874621582
+    second: Shiba 1_28
+  - first:
+      213: 7999175763308385179
+    second: Shiba 1_29
+  - first:
+      213: 7418379605570382488
+    second: Shiba 1_30
+  - first:
+      213: -3620470785656325675
+    second: Shiba 1_31
+  - first:
+      213: -4439137420377146935
+    second: Shiba 1_32
+  - first:
+      213: 6994121115382180934
+    second: Shiba 1_33
+  - first:
+      213: -1953484847840702475
+    second: Shiba 1_34
+  - first:
+      213: 4789124612106054340
+    second: Shiba 1_35
+  - first:
+      213: 6081138959548395581
+    second: Shiba 1_36
+  - first:
+      213: 8192534662020635198
+    second: Shiba 1_37
+  - first:
+      213: 7802581098536791979
+    second: Shiba 1_38
+  - first:
+      213: 3516142786287633396
+    second: Shiba 1_39
+  - first:
+      213: -5052668686647860064
+    second: Shiba 1_40
+  - first:
+      213: 5174533988889220344
+    second: Shiba 1_41
+  - first:
+      213: 5718495361930537918
+    second: Shiba 1_42
+  - first:
+      213: -8989498103755324068
+    second: Shiba 1_43
+  - first:
+      213: -3890152210274463601
+    second: Shiba 1_44
+  - first:
+      213: 4099365069151585632
+    second: Shiba 1_45
+  - first:
+      213: 497999152421380694
+    second: Shiba 1_46
+  - first:
+      213: 6341507975888851384
+    second: Shiba 1_47
+  - first:
+      213: 8882254930621366507
+    second: Shiba 1_48
+  - first:
+      213: 5927368913296394435
+    second: Shiba 1_49
+  - first:
+      213: 3910744653085631993
+    second: Shiba 1_50
+  - first:
+      213: -7979899590170112558
+    second: Shiba 1_51
+  - first:
+      213: -6071395550179741262
+    second: Shiba 1_52
+  - first:
+      213: 6552593801558744635
+    second: Shiba 1_53
+  - first:
+      213: -4531013789657914573
+    second: Shiba 1_54
+  - first:
+      213: 1649998001478496192
+    second: Shiba 1_55
+  - first:
+      213: 8196408064629485072
+    second: Shiba 1_56
+  - first:
+      213: 8576127575221252172
+    second: Shiba 1_57
+  - first:
+      213: 4169808890297175531
+    second: Shiba 1_58
+  - first:
+      213: -8492983271573233902
+    second: Shiba 1_59
+  - first:
+      213: -8332833877509800412
+    second: Shiba 1_60
+  - first:
+      213: 6473640922218800104
+    second: Shiba 1_61
+  - first:
+      213: 6417968030559375159
+    second: Shiba 1_62
+  - first:
+      213: 8653938381542336026
+    second: Shiba 1_63
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Shiba_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 980
+        width: 83
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10742cc582a19b960800000000000000
+      internalID: 7618149005331154689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 980
+        width: 87
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f775cb1163c54ec90800000000000000
+      internalID: -7141481721807218817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 980
+        width: 91
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7def34c95c0476ea0800000000000000
+      internalID: -5879659571034456361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Idle_4
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 980
+        width: 84
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6785c26e1f7aa9a0800000000000000
+      internalID: -6221020166776060052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Idle_5
+      rect:
+        serializedVersion: 2
+        x: 1305
+        y: 980
+        width: 79
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7ac711ea81abb450800000000000000
+      internalID: 6105651337684830846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Idle_6
+      rect:
+        serializedVersion: 2
+        x: 1491
+        y: 980
+        width: 75
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4ebf676375014620800000000000000
+      internalID: 2756490440142208589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sleep_1
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 794
+        width: 72
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0bcd3aaa73f31b20800000000000000
+      internalID: 3104092276356139791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sleep_2
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 794
+        width: 56
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90e86923ecb3a3090800000000000000
+      internalID: -8054059226800681463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sleep_3
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 794
+        width: 72
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b6889684970aab40800000000000000
+      internalID: 5452178633380103862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sleep_4
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 794
+        width: 80
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8871a90c3a7700b0800000000000000
+      internalID: -5762502799919056755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sleep_5
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 794
+        width: 83
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12f8fe6223293b210800000000000000
+      internalID: 1347581457613164321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sleep_6
+      rect:
+        serializedVersion: 2
+        x: 1487
+        y: 794
+        width: 79
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 744c188111d97ec30800000000000000
+      internalID: 4388649058647000135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 609
+        width: 83
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 814eb64a6195cb6c0800000000000000
+      internalID: -4126325204795530216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 609
+        width: 87
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8600b28a5d80aefd0800000000000000
+      internalID: -2312025744958881688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 609
+        width: 87
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fcc2da808eaafb10800000000000000
+      internalID: 2016115650309836024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 1111
+        y: 609
+        width: 84
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 273c87318ae05aef0800000000000000
+      internalID: -97655701874621582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 1305
+        y: 609
+        width: 76
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9319eba9f7c20f60800000000000000
+      internalID: 7999175763308385179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Walk_6
+      rect:
+        serializedVersion: 2
+        x: 1487
+        y: 609
+        width: 79
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89a660f62f063f660800000000000000
+      internalID: 7418379605570382488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Run_1
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 423
+        width: 91
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ffc85281e3d3e4e0800000000000000
+      internalID: -1953484847840702475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Run_2
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 423
+        width: 91
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ca69a9f573667240800000000000000
+      internalID: 4789124612106054340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Run_3
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 427
+        width: 99
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d30bba91aab846450800000000000000
+      internalID: 6081138959548395581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Run_4
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 427
+        width: 95
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3a90d38edab1b170800000000000000
+      internalID: 8192534662020635198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Run_5
+      rect:
+        serializedVersion: 2
+        x: 1286
+        y: 423
+        width: 95
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baf66755b26584c60800000000000000
+      internalID: 7802581098536791979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Run_6
+      rect:
+        serializedVersion: 2
+        x: 1479
+        y: 423
+        width: 87
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f30a3c1c39dbc030800000000000000
+      internalID: 3516142786287633396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sit_1
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 237
+        width: 84
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b15923c7ef810850800000000000000
+      internalID: 6341507975888851384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sit_2
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 237
+        width: 83
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be006289ccb144b70800000000000000
+      internalID: 8882254930621366507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sit_3
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 237
+        width: 83
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c889b14f9e324250800000000000000
+      internalID: 5927368913296394435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sit_4
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 237
+        width: 87
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f56d6eba81c54630800000000000000
+      internalID: 3910744653085631993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sit_5
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 237
+        width: 87
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dd00a02a93b14190800000000000000
+      internalID: -7979899590170112558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Sit_6
+      rect:
+        serializedVersion: 2
+        x: 1475
+        y: 237
+        width: 84
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b136ac2ae11ebba0800000000000000
+      internalID: -6071395550179741262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Bark_1
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 51
+        width: 83
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c40be756796840770800000000000000
+      internalID: 8576127575221252172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Bark_2
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 51
+        width: 87
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bedcd67d7132ed930800000000000000
+      internalID: 4169808890297175531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Bark_3
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 51
+        width: 95
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21fda8656bcd22a80800000000000000
+      internalID: -8492983271573233902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Bark_4
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 51
+        width: 107
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42effa6dcb3db5c80800000000000000
+      internalID: -8332833877509800412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Bark_5
+      rect:
+        serializedVersion: 2
+        x: 1305
+        y: 51
+        width: 120
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e3a844be1ef6d950800000000000000
+      internalID: 6473640922218800104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shiba_Bark_6
+      rect:
+        serializedVersion: 2
+        x: 1491
+        y: 51
+        width: 75
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1623f38b17f81870800000000000000
+      internalID: 8653938381542336026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 41a1072b2bdcc774984bfdaf0916cc69
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Shiba 1_0: 7336394034894209819
+      Shiba 1_1: 5026919598382090140
+      Shiba 1_10: -9111142268992431830
+      Shiba 1_11: -5340655676611537355
+      Shiba 1_12: -5287168834749883811
+      Shiba 1_13: -6015499312120059695
+      Shiba 1_14: -8710587351090030025
+      Shiba 1_2: 664829808446978195
+      Shiba 1_21: -5300875339515530653
+      Shiba 1_22: 6186071907237853131
+      Shiba 1_23: -4190214796768233716
+      Shiba 1_24: 2162934144350560649
+      Shiba 1_3: -6946362428511943558
+      Shiba 1_31: -3620470785656325675
+      Shiba 1_32: -4439137420377146935
+      Shiba 1_33: 6994121115382180934
+      Shiba 1_40: -5052668686647860064
+      Shiba 1_41: 5174533988889220344
+      Shiba 1_42: 5718495361930537918
+      Shiba 1_43: -8989498103755324068
+      Shiba 1_44: -3890152210274463601
+      Shiba 1_45: 4099365069151585632
+      Shiba 1_46: 497999152421380694
+      Shiba 1_53: 6552593801558744635
+      Shiba 1_54: -4531013789657914573
+      Shiba 1_55: 1649998001478496192
+      Shiba 1_56: 8196408064629485072
+      Shiba 1_62: 6417968030559375159
+      Shiba_0: 900054126
+      Shiba_Bark_1: 8576127575221252172
+      Shiba_Bark_2: 4169808890297175531
+      Shiba_Bark_3: -8492983271573233902
+      Shiba_Bark_4: -8332833877509800412
+      Shiba_Bark_5: 6473640922218800104
+      Shiba_Bark_6: 8653938381542336026
+      Shiba_Idle_1: 7618149005331154689
+      Shiba_Idle_2: -7141481721807218817
+      Shiba_Idle_3: -5879659571034456361
+      Shiba_Idle_4: -6221020166776060052
+      Shiba_Idle_5: 6105651337684830846
+      Shiba_Idle_6: 2756490440142208589
+      Shiba_Run_1: -1953484847840702475
+      Shiba_Run_2: 4789124612106054340
+      Shiba_Run_3: 6081138959548395581
+      Shiba_Run_4: 8192534662020635198
+      Shiba_Run_5: 7802581098536791979
+      Shiba_Run_6: 3516142786287633396
+      Shiba_Sit_1: 6341507975888851384
+      Shiba_Sit_2: 8882254930621366507
+      Shiba_Sit_3: 5927368913296394435
+      Shiba_Sit_4: 3910744653085631993
+      Shiba_Sit_5: -7979899590170112558
+      Shiba_Sit_6: -6071395550179741262
+      Shiba_Sleep_1: 3104092276356139791
+      Shiba_Sleep_2: -8054059226800681463
+      Shiba_Sleep_3: 5452178633380103862
+      Shiba_Sleep_4: -5762502799919056755
+      Shiba_Sleep_5: 1347581457613164321
+      Shiba_Sleep_6: 4388649058647000135
+      Shiba_Walk_1: -4126325204795530216
+      Shiba_Walk_2: -2312025744958881688
+      Shiba_Walk_3: 2016115650309836024
+      Shiba_Walk_4: -97655701874621582
+      Shiba_Walk_5: 7999175763308385179
+      Shiba_Walk_6: 7418379605570382488
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
