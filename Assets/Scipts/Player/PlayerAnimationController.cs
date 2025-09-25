@@ -7,22 +7,23 @@ using Manager;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationController : MonoBehaviour
 {
+    public Animator PlayerAnimator { get; private set; }
+
     private PlayerController playerController;
-    private Animator animator;
     private int isGroundId;
-    private int isWalkId;
-    private int isRunId;
+    private int walkTriggerId;
+    private int runTriggerId;
     private int jumpTriggerId;
 
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
-        animator = GetComponent<Animator>();
+        PlayerAnimator = GetComponent<Animator>();
 
         // 문자열 → int hash 변환
         isGroundId = Animator.StringToHash("IsGround");
-        isWalkId = Animator.StringToHash("IsWalk");
-        isRunId = Animator.StringToHash("IsRun");
+        walkTriggerId = Animator.StringToHash("WalkTrigger");
+        runTriggerId = Animator.StringToHash("RunTrigger");
         jumpTriggerId = Animator.StringToHash("JumpTrigger");
     }
 
@@ -33,64 +34,61 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.IsGameStarted == false &&
+        Debug.Log($"IsGameStarted: {GameManager.Instance.IsGameStarted}");
+        Debug.Log($"IsGameOver: {GameManager.Instance.IsGameOver}");
+
+        if (GameManager.Instance.IsGameStarted == false ||
             GameManager.Instance.IsGameOver == true)
             return;
+
+        Debug.Log("Update Called");
 
         CheckGround();
     }
 
+    public void SetJumpTrigger()
+    {
+        PlayerAnimator.SetTrigger(jumpTriggerId);
+    }
+
     private IEnumerator WaitGameStart()
     {
-        while (!GameManager.Instance.IsGameStarted)
+        while (GameManager.Instance.IsGameStarted == false)
             yield return null;
 
-        ToggleMoveMode();
+        PlayerAnimator.SetTrigger(walkTriggerId);
 
         yield break;
     }
 
     private void CheckGround()
     {
-        if (playerController.IsGround)
+        if (playerController.IsGround == true)
         {
-            animator.SetBool(isGroundId, true);
+            PlayerAnimator.SetBool(isGroundId, true);
+
+            
         }
         else
         {
-            animator.SetBool(isGroundId, false);
-            animator.SetTrigger(jumpTriggerId);
+            PlayerAnimator.SetBool(isGroundId, false);
         }
     }
 
-    private void CheckScore()
-    {
-
-    }
     
-    private void ToggleMoveMode()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        bool walk = animator.GetBool(isWalkId);
-        bool run = animator.GetBool(isRunId);
-
-        // Initialize
-        if (walk == false && run == false)
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            animator.SetBool(isWalkId, true);
-            animator.SetBool(isRunId, false);
-            return;
-        }
-
-        // Toggle
-        if (walk == true && run == false)
-        {
-            animator.SetBool(isWalkId, false);
-            animator.SetBool(isRunId, true);
-        }
-        else
-        {
-            animator.SetBool(isWalkId, true);
-            animator.SetBool(isRunId, false);
+            switch (GameManager.Instance.GamePhase)
+            {
+                case GamePhases.SlowPhase:
+                    PlayerAnimator.SetTrigger(walkTriggerId);
+                    break;
+                case GamePhases.FastPhase:
+                    PlayerAnimator.SetTrigger(runTriggerId);
+                    break;
+            }
         }
     }
 }

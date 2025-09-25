@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,13 +6,15 @@ using UnityEngine.InputSystem;
 * 1. 나중에 UI에서 점프력 게이지를 표시하려면 holdTime을 퍼센트로 변환하는 로직이 필요함
 */
 
-[RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Player))]
+[RequireComponent(typeof(PlayerAnimationController))]
 public class PlayerController : MonoBehaviour
 {
     public bool IsGround { get { return isGrounded; } }
 
     private Player player;
+    private PlayerAnimationController animationController;
 
     private bool isGrounded = true;
     private bool isCharging = false;
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Player>();
+        animationController = GetComponent<PlayerAnimationController>();
     }
 
     private void Update()
@@ -63,6 +67,8 @@ public class PlayerController : MonoBehaviour
         {
             // 버튼을 뗐을 때
             isCharging = false;
+            
+            animationController.SetJumpTrigger();
         }
     }
 

@@ -3,17 +3,28 @@ using Singleton;
 
 namespace Manager
 {
+    public enum GamePhases : int
+    {
+        None = 0,
+
+        SlowPhase,
+        FastPhase,
+
+        Size,
+    }
+
     public class GameManager : SingletonBase<GameManager>
     {
-        public float GetScore { get { return score; } }
+        public GamePhases GamePhase { get; private set; } = GamePhases.SlowPhase;
+
+        public float Score { get; private set; } = 0.0f;
         public bool IsCompletedCameraMove { get; set; } = false;
         public bool IsGameStarted { get; private set; } = false;
         public bool IsGameOver { get; private set; } = false;
 
+
         [SerializeField]
         private float waitTime = 3.0f;
-
-        private float score = 0.0f;
 
         private void Awake()
         {
@@ -41,31 +52,39 @@ namespace Manager
             }
         }
 
-#region Score Method
+        #region Score Method
         public void AddCoinScore(CoinTypes coinTypes)
         {
             switch (coinTypes)
             {
                 case CoinTypes.Bronze:
-                    score += 30.0f;
+                    Score += 30.0f;
                     break;
                 case CoinTypes.Silver:
-                    score += 60.0f;
+                    Score += 60.0f;
                     break;
                 case CoinTypes.Gold:
-                    score += 100.0f;
+                    Score += 100.0f;
                     break;
             }
         }
-        
+
         private void AddTimeScore()
         {
             if (IsGameOver && IsGameStarted)
             {
-                score += Time.deltaTime;
+                switch (GamePhase)
+                {
+                    case GamePhases.SlowPhase:
+                        Score += Time.deltaTime;
+                        break;
+                    case GamePhases.FastPhase:
+                        Score += Time.deltaTime * 1.5f;
+                        break;
+                }
             }
         }
-#endregion
+        #endregion
 
         private void OnPlayerOver()
         {
