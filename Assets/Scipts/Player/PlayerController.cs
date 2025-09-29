@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Manager;
+using NUnit.Framework;
+using UnityEditor.Build;
 
 /* Memo
 * 1. 나중에 UI에서 점프력 게이지를 표시하려면 holdTime을 퍼센트로 변환하는 로직이 필요함
@@ -8,25 +11,22 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Player))]
-[RequireComponent(typeof(PlayerAnimationController))]
 public class PlayerController : MonoBehaviour
 {
-    public bool IsGround { get { return isGrounded; } }
-
     private Player player;
-    private PlayerAnimationController animationController;
+
+    private bool jumpButtonReleased = false;
 
     private bool isGrounded = true;
     private bool isCharging = false;
     private float holdTime = 0f;
 
-    private float lastGroundedTime = 0.0f;     // 지면에 있었던 마지막 시간
-    private float lastJumpPressedTime = -1.0f;  // 점프 버튼을 눌렀던 마지막 시간
+    private float lastGroundedTime = float.MinValue;     // 지면에 있었던 마지막 시간
+    private float lastJumpPressedTime = float.MinValue;  // 점프 버튼을 눌렀던 마지막 시간
 
     private void Awake()
     {
         player = GetComponent<Player>();
-        animationController = GetComponent<PlayerAnimationController>();
     }
 
     private void Update()
@@ -37,38 +37,51 @@ public class PlayerController : MonoBehaviour
             holdTime += Time.deltaTime;
         }
 
-        // Coyote Time 갱신
-        if (IsGrounded())
+        if (isGrounded)
         {
+            // Coyote Time 갱신
             lastGroundedTime = Time.time;
         }
 
-        // Jump Buffer 및 Coyote Time 확인
-        if ((Time.time - lastJumpPressedTime <= player.jumpSettings.jumpBufferTime) &&
-            (Time.time - lastGroundedTime <= player.jumpSettings.coyoteTime))
+        if (jumpButtonReleased)
         {
-            ExecuteJump();
-            lastJumpPressedTime = float.MinValue; // 한번 사용 후 초기화
+            // 1) 점프 버퍼링
+            if (Time.time - lastJumpPressedTime <= player.jumpSettings.jumpBufferTime &&
+                isGrounded)
+            {
+                ExecuteJump();
+                return;
+            }
+
+            // 2) 땅 위에서 점프
+            if (isGrounded)
+            {
+                ExecuteJump();
+            }
+            // 2) 코요테 타임 점프
+            else if (Time.time - lastGroundedTime <= player.jumpSettings.coyoteTime)
+            {
+                ExecuteJump();
+            }
         }
     }
 
-    
+
     // PlayerInput 컴포넌트가 Jump 액션을 호출할 때 실행됨
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            // 점프 버튼 누름 시작
             isCharging = true;
             holdTime = 0f;
             lastJumpPressedTime = Time.time;
         }
-        else if (context.canceled)
+
+        if (context.canceled)
         {
-            // 버튼을 뗐을 때
             isCharging = false;
-            
-            animationController.SetJumpTrigger();
+
+            jumpButtonReleased = true;
         }
     }
 
@@ -82,16 +95,16 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         isCharging = false;
         holdTime = 0f;
-    }
 
-    private bool IsGrounded()
-    {
-        // 코요테 타임 체크
-        return player.rb.linearVelocityY <= 0 && isGrounded;
+        jumpButtonReleased = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (GameManager.Instance.IsGameStarted == false ||
+            GameManager.Instance.IsGameOver == true)
+            return;
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;

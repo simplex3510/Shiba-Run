@@ -2,29 +2,91 @@ using System.Collections;
 
 using UnityEngine;
 using Manager;
+using Unity.Mathematics;
 
-[RequireComponent(typeof(PlayerController))]
+abstract class AnimParam
+{
+    protected Animator animator;
+    protected int id;
+
+    protected AnimParam(Animator animator, string name)
+    {
+        this.animator = animator;
+        id = Animator.StringToHash(name);
+    }
+}
+
+class AnimBoolParam : AnimParam
+{
+    private bool boolValue;
+    public bool BoolValue
+    {
+        get => boolValue;
+        set
+        {
+            boolValue = value;
+            animator.SetBool(id, value);
+        }
+    }
+
+    public AnimBoolParam(Animator animator, string name) : base(animator, name) { }
+}
+class AnimIntParam : AnimParam
+{
+    private int intValue;
+    public int IntValue
+    {
+        get => intValue;
+        set
+        {
+            intValue = value;
+            animator.SetInteger(id, value);
+        }
+    }
+
+    public AnimIntParam(Animator animator, string name) : base(animator, name) { }
+}
+class AnimFloatParam : AnimParam
+{
+    private float floatValue;
+    public float FloatValue
+    {
+        get => floatValue;
+        set
+        {
+            floatValue = value;
+            animator.SetFloat(id, value);
+        }
+    }
+
+    public AnimFloatParam(Animator animator, string name) : base(animator, name) { }
+}
+class AnimTriggerParam : AnimParam
+{
+    public void SetTrigger()
+    {
+        animator.SetTrigger(id);
+    }
+
+    public AnimTriggerParam(Animator animator, string name) : base(animator, name) { }
+}
+
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationController : MonoBehaviour
 {
     public Animator PlayerAnimator { get; private set; }
 
-    private PlayerController playerController;
-    private int isGroundId;
-    private int walkTriggerId;
-    private int runTriggerId;
-    private int jumpTriggerId;
+    private AnimTriggerParam WalkTrigger { get; set; }
+    private AnimTriggerParam RunTrigger { get; set; }
+    private AnimTriggerParam JumpTrigger { get; set; }
 
     private void Awake()
     {
-        playerController = GetComponent<PlayerController>();
         PlayerAnimator = GetComponent<Animator>();
 
-        // 문자열 → int hash 변환
-        isGroundId = Animator.StringToHash("IsGround");
-        walkTriggerId = Animator.StringToHash("WalkTrigger");
-        runTriggerId = Animator.StringToHash("RunTrigger");
-        jumpTriggerId = Animator.StringToHash("JumpTrigger");
+        JumpTrigger = new AnimTriggerParam(PlayerAnimator, "JumpTrigger");
+        WalkTrigger = new AnimTriggerParam(PlayerAnimator, "WalkTrigger");
+        RunTrigger = new AnimTriggerParam(PlayerAnimator, "RunTrigger");
     }
 
     private void Start()
@@ -32,63 +94,55 @@ public class PlayerAnimationController : MonoBehaviour
         StartCoroutine(WaitGameStart());
     }
 
-    private void Update()
-    {
-        Debug.Log($"IsGameStarted: {GameManager.Instance.IsGameStarted}");
-        Debug.Log($"IsGameOver: {GameManager.Instance.IsGameOver}");
-
-        if (GameManager.Instance.IsGameStarted == false ||
-            GameManager.Instance.IsGameOver == true)
-            return;
-
-        Debug.Log("Update Called");
-
-        CheckGround();
-    }
-
     public void SetJumpTrigger()
     {
-        PlayerAnimator.SetTrigger(jumpTriggerId);
+        JumpTrigger.SetTrigger();
     }
 
     private IEnumerator WaitGameStart()
     {
+        // 게임 시작 전까지 대기
         while (GameManager.Instance.IsGameStarted == false)
+        {
             yield return null;
+        }
 
-        PlayerAnimator.SetTrigger(walkTriggerId);
+        // 게임 시작 시점에 걷기 애니메이션 재생
+        WalkTrigger.SetTrigger();
 
         yield break;
     }
 
-    private void CheckGround()
-    {
-        if (playerController.IsGround == true)
-        {
-            PlayerAnimator.SetBool(isGroundId, true);
-
-            
-        }
-        else
-        {
-            PlayerAnimator.SetBool(isGroundId, false);
-        }
-    }
-
-    
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (GameManager.Instance.IsGameStarted == false ||
+            GameManager.Instance.IsGameOver == true)
+            return;
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             switch (GameManager.Instance.GamePhase)
             {
                 case GamePhases.SlowPhase:
-                    PlayerAnimator.SetTrigger(walkTriggerId);
+                    WalkTrigger.SetTrigger();
                     break;
                 case GamePhases.FastPhase:
-                    PlayerAnimator.SetTrigger(runTriggerId);
+                    RunTrigger.SetTrigger();
                     break;
             }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (GameManager.Instance.IsGameStarted == false ||
+            GameManager.Instance.IsGameOver == true)
+            return;
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            // 점프 애니메이션 재생
+            JumpTrigger.SetTrigger();
         }
     }
 }
