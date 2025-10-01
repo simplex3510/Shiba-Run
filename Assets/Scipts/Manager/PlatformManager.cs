@@ -14,10 +14,7 @@ namespace Manager
         [Header("Move Setting")]
         [SerializeField] private float speed = 5.0f;
 
-        [Header("Reposition Setting")]
-        [SerializeField] private float maxHeight;
-        [SerializeField] private float minHeight;
-        [SerializeField] private float repositionX;
+
 
         void Start()
         {
@@ -28,12 +25,6 @@ namespace Manager
         {
             if (!CanMovePlatform)
                 return;
-        }
-
-        public void RepositionPlatform(GameObject platform)
-        {
-            float randomY = Random.Range(minHeight, maxHeight);
-            platform.transform.position = new Vector2(repositionX, randomY);
         }
 
         private IEnumerator WaitGameStart()

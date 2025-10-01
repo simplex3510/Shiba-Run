@@ -18,7 +18,7 @@ public class MovePlatform : MonoBehaviour
         {
             coin = GetComponentInChildren<Coin>();
             if (coin == null)
-                Debug.LogError("MovePlatform: Coin is not assigned.");
+                Debug.LogError("MovePlatform: Coin is not assigned: " + gameObject.name);
         }
     }
 
@@ -33,14 +33,5 @@ public class MovePlatform : MonoBehaviour
             return;
 
         rb.MovePosition(rb.position + Vector2.left * speed * Time.fixedDeltaTime);
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Zone"))
-        {
-            PlatformManager.Instance.RepositionPlatform(gameObject);
-            coin?.gameObject.SetActive(true);
-        }
     }
 }

@@ -111,7 +111,7 @@ public class Coin : MonoBehaviour
     // 플레이어가 코인과 충돌하지 않고 지나쳐갈 경우, RepositionZone에서 코인 재설정.
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Zone"))
+        if (collision.gameObject.CompareTag("RepositionZone"))
         {
             SetCoinType();
         }
