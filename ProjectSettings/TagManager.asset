@@ -5,8 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
-  - DeadZone
   - Platform
+  - DeadZone
+  - RepositionZone
   layers:
   - Default
   - TransparentFX

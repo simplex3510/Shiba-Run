@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647c8a5203a638f4f99426749be6714c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {x: -19, y: 0, z: -10}
+  startPoint: {x: -15, y: 0, z: -10}
   endPoint: {x: 0, y: 0, z: -10}
   smoothTime: 0.25
 --- !u!1 &526146690
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 1034145379}
   m_Layer: 0
   m_Name: RepositionZone
-  m_TagString: DeadZone
+  m_TagString: RepositionZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -778,10 +778,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5550264925494858556, guid: ca46fbcaffc28d34bb18d64ff1da1827, type: 3}
-      propertyPath: m_Material
+    - target: {fileID: 3272069496622807515, guid: ca46fbcaffc28d34bb18d64ff1da1827, type: 3}
+      propertyPath: coin
       value: 
-      objectReference: {fileID: 6200000, guid: 9ab1bb94de80fed46974c250b7976171, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -795,13 +795,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1596218046097388842, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 9ab1bb94de80fed46974c250b7976171, type: 2}
     - target: {fileID: 3225947205228365431, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
       propertyPath: m_Name
       value: Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 5311678348121579199, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
+      propertyPath: coin
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7995376721463765793, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -927,8 +927,16 @@ PrefabInstance:
       value: Shiba
       objectReference: {fileID: 0}
     - target: {fileID: 2409709118105963703, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
+      propertyPath: m_Mass
+      value: 1.1853981
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409709118105963703, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
       propertyPath: m_Material
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2409709118105963703, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3437979927386038657, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
       propertyPath: m_LocalPosition.x
