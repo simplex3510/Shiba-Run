@@ -17,7 +17,7 @@ public class BackgroundLoop : MonoBehaviour
 
     private void Start()
     {
-        speed = EnvironmentManager.Instance.Speed;
+        speed = PlatformManager.Instance.Speed;
     }
 
     private void Update()

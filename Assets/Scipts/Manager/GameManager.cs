@@ -52,26 +52,25 @@ namespace Manager
             }
         }
 
-        #region Score Method
-        public void AddCoinScore(CoinTypes coinTypes)
+        public void SetGameOver()
         {
-            switch (coinTypes)
-            {
-                case CoinTypes.Bronze:
-                    Score += 30.0f;
-                    break;
-                case CoinTypes.Silver:
-                    Score += 60.0f;
-                    break;
-                case CoinTypes.Gold:
-                    Score += 100.0f;
-                    break;
-            }
+            IsGameOver = true;
+        }
+
+        #region Score Method
+        public void AddScore(int score)
+        {
+            Score += score;
+        }
+
+        public void AddScore(float score)
+        {
+            Score += score;
         }
 
         private void AddTimeScore()
         {
-            if (IsGameOver && IsGameStarted)
+            if (IsGameStarted && !IsGameOver)
             {
                 switch (GamePhase)
                 {
@@ -85,10 +84,5 @@ namespace Manager
             }
         }
         #endregion
-
-        private void OnPlayerOver()
-        {
-            IsGameOver = true;
-        }
     }
 }

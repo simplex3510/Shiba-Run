@@ -19,9 +19,17 @@ public class Player : MonoBehaviour
     [Header("References")]
     public Rigidbody2D rb;
 
-    private void Reset()
+    private void Awake()
     {
         // 자동으로 Rigidbody2D 참조 연결
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            rb.linearVelocity = new Vector2(0.0f, rb.linearVelocityY);
+        }
     }
 }

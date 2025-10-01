@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
         jumpButtonReleased = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (GameManager.Instance.IsGameStarted == false ||
             GameManager.Instance.IsGameOver == true)
@@ -107,7 +107,16 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGrounded = true;
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                if (contact.normal.y > 0.5f) // 위쪽에서 눌린 경우
+                {
+                    isGrounded = true;
+                    return;
+                }
+            }
         }
+
+        isGrounded = false;
     }
 }

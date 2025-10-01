@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8105346608578069625}
   - component: {fileID: 8600322608458302491}
   - component: {fileID: 2409709118105963703}
-  - component: {fileID: 6348364922497589383}
+  - component: {fileID: 1749639083376384842}
   - component: {fileID: 203750101049017766}
   - component: {fileID: 2833323310593298595}
   - component: {fileID: 6842651615053213358}
@@ -59,6 +59,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,6 +82,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1217035393
   m_SortingLayer: 3
   m_SortingOrder: 0
@@ -142,9 +145,9 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 5
---- !u!61 &6348364922497589383
-BoxCollider2D:
+  m_Constraints: 4
+--- !u!70 &1749639083376384842
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -178,17 +181,8 @@ BoxCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.296875, y: 1}
-    newSize: {x: 0.83, y: 0.6}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1.3833333, y: 1.0666667}
-  m_EdgeRadius: 0
+  m_Size: {x: 1.4, y: 1}
+  m_Direction: 1
 --- !u!114 &203750101049017766
 MonoBehaviour:
   m_ObjectHideFlags: 0

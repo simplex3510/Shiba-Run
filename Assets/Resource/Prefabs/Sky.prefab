@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3472197661023108406}
   - component: {fileID: 4301295624620167122}
   - component: {fileID: 9061044264474790675}
-  - component: {fileID: 2594504511827210088}
+  - component: {fileID: 2721205935220966272}
   m_Layer: 0
   m_Name: Sky
   m_TagString: Untagged
@@ -54,6 +54,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -75,6 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -201581823
   m_SortingLayer: 1
   m_SortingOrder: 0
@@ -101,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95155210a4b97634c952f1a8c56b846e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2594504511827210088
+--- !u!114 &2721205935220966272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,6 +113,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8111138544346231049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e692a746f7c694bad3d2fd18aeb0b9, type: 3}
+  m_Script: {fileID: 11500000, guid: e6e0d8b663abe364dbc53a94782278d2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: '::'
