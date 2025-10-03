@@ -1,17 +1,19 @@
 using UnityEngine;
 using Manager;
+using System.Linq;
+using System.ComponentModel;
+using System.Collections.Generic;
 
 public class PlatformSpawner : MonoBehaviour
 {
-    private MovePlatform[] platforms;
+    [SerializeField] private List<MovePlatform> platforms;
 
-    private int maxPlatformCount;
-    private int lastSpawnPlatformIndex = 0;
-
-    private float lastSpawnPlatformTime = float.MinValue;
+    [Header("Platform Prefab")]
+    [SerializeField] private MovePlatform platformPrefab;
 
     [Header("Platform Spawn Setting")]
-    [SerializeField] private float spawnDelayTime;
+    private float spawnTimer = float.MaxValue;
+    [SerializeField] private float spawnCycleTime;
     [SerializeField] private float spawnPositionX;
     [SerializeField] private int spawnPlatformCount;
 
@@ -21,33 +23,66 @@ public class PlatformSpawner : MonoBehaviour
 
     private void Awake()
     {
-        platforms = GetComponentsInChildren<MovePlatform>();
+        platforms = GetComponentsInChildren<MovePlatform>().ToList();
+    }
 
-        maxPlatformCount = platforms.Length;
+    private void Start()
+    {
+        Debug.Log(platforms.Count);
+        if (platforms.Count > 0)
+        {
+            foreach (var platform in platforms)
+            {
+                RepositionPlatform(platform.gameObject);
+                platform.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void Update()
     {
-        if (Time.time - lastSpawnPlatformTime < spawnDelayTime)
+        if (PlatformManager.Instance.CanMovePlatform == false)
             return;
 
-        SpawnPlatform(platforms[lastSpawnPlatformIndex]);
-        lastSpawnPlatformIndex = (lastSpawnPlatformIndex + 1) % maxPlatformCount;
+        spawnTimer += Time.deltaTime;
+        if (spawnTimer < spawnCycleTime)
+            return;
+
+        SpawnPlatform();
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Platform"))
+        if (other.gameObject.CompareTag("Ground"))
         {
             // 플랫폼 리포지셔닝
             RepositionPlatform(other.gameObject);
         }
     }
 
-    private void SpawnPlatform(MovePlatform platform)
+    private void SpawnPlatform()
     {
-        // 플랫폼 추가 스폰(활성화)
+        // 타이머 초기화
+        spawnTimer = 0.0f;
+
+        // 비활성화된 플랫폼이 있으면 재사용
+        for (int index = 0; index < platforms.Count; ++index)
+        {
+            if (platforms[index].gameObject.activeSelf == false)
+            {
+                platforms[index].gameObject.SetActive(true);
+                return;
+            }
+        }
+
+        // 비활성화된 플랫폼이 없으면 새로 생성
+        Debug.Log("There is no available platform, spawning a new one.");
+        MovePlatform platform = Instantiate(platformPrefab, this.transform);
+        RepositionPlatform(platform.gameObject);
         platform.gameObject.SetActive(true);
+        platforms.Add(platform);
+
+        return;
     }
 
     public void RepositionPlatform(GameObject platform)

@@ -17,8 +17,6 @@ public class MovePlatform : MonoBehaviour
         if (coin == null)
         {
             coin = GetComponentInChildren<Coin>();
-            if (coin == null)
-                Debug.LogError("MovePlatform: Coin is not assigned: " + gameObject.name);
         }
     }
 
@@ -33,5 +31,13 @@ public class MovePlatform : MonoBehaviour
             return;
 
         rb.MovePosition(rb.position + Vector2.left * speed * Time.fixedDeltaTime);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("RepositionZone"))
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

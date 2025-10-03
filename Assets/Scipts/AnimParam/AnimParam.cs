@@ -5,12 +5,12 @@ namespace AnimParams
     public abstract class AnimParam
     {
         protected Animator animator;
-        protected int id;
+        protected int paramId;
 
         protected AnimParam(Animator animator, string name)
         {
             this.animator = animator;
-            id = Animator.StringToHash(name);
+            paramId = Animator.StringToHash(name);
         }
     }
 
@@ -23,12 +23,13 @@ namespace AnimParams
             set
             {
                 boolValue = value;
-                animator.SetBool(id, value);
+                animator.SetBool(paramId, boolValue);
             }
         }
 
         public AnimBoolParam(Animator animator, string name) : base(animator, name) { }
     }
+
     public class AnimIntParam : AnimParam
     {
         private int intValue;
@@ -38,12 +39,13 @@ namespace AnimParams
             set
             {
                 intValue = value;
-                animator.SetInteger(id, value);
+                animator.SetInteger(paramId, intValue);
             }
         }
 
         public AnimIntParam(Animator animator, string name) : base(animator, name) { }
     }
+
     public class AnimFloatParam : AnimParam
     {
         private float floatValue;
@@ -53,17 +55,18 @@ namespace AnimParams
             set
             {
                 floatValue = value;
-                animator.SetFloat(id, value);
+                animator.SetFloat(paramId, floatValue);
             }
         }
 
         public AnimFloatParam(Animator animator, string name) : base(animator, name) { }
     }
+
     public class AnimTriggerParam : AnimParam
     {
         public void SetTrigger()
         {
-            animator.SetTrigger(id);
+            animator.SetTrigger(paramId);
         }
 
         public AnimTriggerParam(Animator animator, string name) : base(animator, name) { }

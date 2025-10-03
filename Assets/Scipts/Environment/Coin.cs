@@ -18,11 +18,11 @@ public class Coin : MonoBehaviour
 {
     public AnimIntParam CoinType { get; private set; }
 
-    private Animator animator;
+    [SerializeField] private Animator animator;
 
     private SpriteRenderer spriteRenderer;
 
-    private CoinTypes type;
+    [SerializeField] private CoinTypes type;
 
     private const int BRONZE_COIN_SCORE = 30;
     private const int SILVER_COIN_SCORE = 50;
@@ -37,38 +37,38 @@ public class Coin : MonoBehaviour
 
     private void OnEnable()
     {
-        SetCoinType();
-    }
-
-    private void OnDisable()
-    {
+        // MEMO: NONE 타입일 때 애니메이션 처리
         SetCoinType();
     }
 
     private void SetCoinType()
     {
-        CoinTypes randomType = (CoinTypes)Random.Range((int)CoinTypes.Bronze, (int)CoinTypes.Size);
-        if (randomType == CoinTypes.None)
+        // 백분률 계산
+        int whatType = Random.Range(0, 100) + 1;
+
+        // 35%
+        if (whatType <= 35)
         {
             type = CoinTypes.None;
         }
+        // 30%
+        else if (whatType <= 60)
+        {
+            type = CoinTypes.Bronze;
+        }
+        // 20%
+        else if (whatType <= 80)
+        {
+            type = CoinTypes.Silver;
+        }
+        // 15%
         else
         {
-            // 확률 계산
-            int whatType = Random.Range(0, 100) + 1;
-
-            // 60% 확률
-            if (whatType <= 60)
-                type = CoinTypes.Bronze;
-            // 30% 확률
-            else if (whatType <= 90)
-                type = CoinTypes.Silver;
-            // 10% 확률
-            else
-                type = CoinTypes.Gold;
+            type = CoinTypes.Gold;
         }
 
-        CoinType.IntValue = Random.Range((int)CoinTypes.None, (int)CoinTypes.Size);
+        animator.SetInteger("CoinType", (int)type);
+        //CoinType.IntValue = (int)type;
     }
 
     private int GetScoreByType()
@@ -95,7 +95,6 @@ public class Coin : MonoBehaviour
         return score;
     }
 
-
     // 플레이어가 코인과 충돌했을 때
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -105,15 +104,6 @@ public class Coin : MonoBehaviour
             GameManager.Instance.AddScore(coinScore);
 
             gameObject.SetActive(false);
-        }
-    }
-
-    // 플레이어가 코인과 충돌하지 않고 지나쳐갈 경우, RepositionZone에서 코인 재설정.
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("RepositionZone"))
-        {
-            SetCoinType();
         }
     }
 }
