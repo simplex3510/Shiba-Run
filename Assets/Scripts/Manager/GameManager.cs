@@ -1,7 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Singleton;
 using TMPro;
-using System.ComponentModel;
 
 namespace Manager
 {
@@ -35,12 +35,18 @@ namespace Manager
         #endregion
 
 
-        [SerializeField]
-        private float waitTime = 3.0f;
+        [SerializeField] private float waitTime = 3.0f;
+
+        public PlayerInputActions inputActions;
 
         private void Awake()
         {
-            
+            // Input System 초기화
+            inputActions = new PlayerInputActions();
+            inputActions.Dev.Enable();
+
+            // ESC (Pause 액션) 눌렀을 때 종료
+            inputActions.Dev.Exit.performed += _ => QuitGame();
         }
 
         private void Start()
@@ -71,6 +77,12 @@ namespace Manager
                     UpdateScoreUI();
                 }
             }
+        }
+
+        private void OnDestroy()
+        {
+            inputActions.Dev.Exit.performed -= _ => QuitGame();
+            inputActions.Dev.Disable();
         }
 
         public void SetGameOver()
@@ -129,5 +141,17 @@ namespace Manager
             }
         }
         #endregion
+
+        private void QuitGame()
+        {
+#if UNITY_EDITOR
+            // 에디터에서 테스트 시
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            // 빌드 시
+            Application.Quit();
+#endif
+            Debug.Log("Game exited (alpha version).");
+        }
     }
 }

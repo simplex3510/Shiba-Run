@@ -1,9 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Manager;
-using NUnit.Framework;
-using UnityEditor.Build;
 
 /* Memo
 * 1. 나중에 UI에서 점프력 게이지를 표시하려면 holdTime을 퍼센트로 변환하는 로직이 필요함
