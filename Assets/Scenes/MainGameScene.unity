@@ -915,37 +915,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 203750101049017766, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1339768741779269386, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
       propertyPath: m_Name
       value: Shiba
-      objectReference: {fileID: 0}
-    - target: {fileID: 1339768741779269386, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2409709118105963703, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
-      propertyPath: m_Mass
-      value: 1.1853981
-      objectReference: {fileID: 0}
-    - target: {fileID: 2409709118105963703, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
-      propertyPath: m_UseAutoMass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2409709118105963703, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
-      propertyPath: m_GravityScale
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2833323310593298595, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
-      propertyPath: jumpSettings.coyoteTime
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 2833323310593298595, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
-      propertyPath: jumpSettings.jumpBufferTime
-      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3437979927386038657, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
       propertyPath: m_LocalPosition.x
@@ -985,6 +957,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3437979927386038657, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842651615053213358, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
+      propertyPath: lastGroundedTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842651615053213358, guid: 891f432ff2836ee4084a4222c36e7076, type: 3}
+      propertyPath: lastJumpPressedTime
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

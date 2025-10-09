@@ -8,6 +8,9 @@ public class DeadZone : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             GameManager.Instance.SetGameOver();
+
+            SoundManager.Instance.StopBGM();
+            SoundManager.Instance.PlaySFX(AudioClipNames.GameSet);
         }
     }
 }

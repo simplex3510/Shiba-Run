@@ -1,6 +1,7 @@
 using UnityEngine;
 using Singleton;
 using TMPro;
+using System.ComponentModel;
 
 namespace Manager
 {
@@ -19,8 +20,15 @@ namespace Manager
         public GamePhases GamePhase { get; private set; } = GamePhases.SlowPhase;
 
         public float Score { get; private set; } = 0.0f;
-        public bool IsGameStarted { get; private set; } = false;
-        public bool IsGameOver { get; private set; } = false;
+
+        #region Game State
+        public bool IsGameStarted { get { return isGameStarted; } set { isGameStarted = value; } }
+        public bool IsGameOver { get { return isGameOver; } set { isGameOver = value; } }
+
+        [SerializeField, ReadOnlyField] private bool isGameOver = false;
+        
+        [SerializeField, ReadOnlyField] private bool isGameStarted = false;
+        #endregion
 
         #region Game UI
         private TextMeshProUGUI scoreText;
@@ -32,13 +40,13 @@ namespace Manager
 
         private void Awake()
         {
-            float randomSeed = System.DateTime.Now.Ticks;
-            Random.InitState((int)randomSeed);
+            
         }
 
         private void Start()
         {
-
+            float randomSeed = System.DateTime.Now.Ticks;
+            Random.InitState((int)randomSeed);
         }
 
         private void Update()
@@ -88,10 +96,10 @@ namespace Manager
                 switch (GamePhase)
                 {
                     case GamePhases.SlowPhase:
-                        Score += Time.deltaTime;
+                        Score += Time.deltaTime * 1.5f;
                         break;
                     case GamePhases.FastPhase:
-                        Score += Time.deltaTime * 1.5f;
+                        Score += Time.deltaTime * 3f;
                         break;
                 }
             }
@@ -113,7 +121,7 @@ namespace Manager
         {
             if (scoreText)
             {
-                scoreText.text = $"Score: {Score:0}";
+                scoreText.text = $"Score: {Mathf.Round(Score)}";
             }
             else
             {

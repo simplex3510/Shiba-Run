@@ -41,7 +41,7 @@ public class PlatformSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (PlatformManager.Instance.CanMovePlatform == false)
+        if (GameManager.Instance.IsGameStarted == false || GameManager.Instance.IsGameOver == true)
             return;
 
         spawnTimer += Time.deltaTime;

@@ -15,14 +15,14 @@ public class PlayerController : MonoBehaviour
 {
     private Player player;
 
-    private bool jumpButtonReleased = false;
+    [SerializeField] private bool jumpButtonReleased = false;
 
-    private bool isGrounded = true;
-    private bool isCharging = false;
-    private float holdTime = 0f;
+    [SerializeField] private bool isGrounded = true;
+    [SerializeField] private bool isCharging = false;
+    [SerializeField] private float holdTime = 0f;
 
-    private float lastGroundedTime = float.MinValue;     // 지면에 있었던 마지막 시간
-    private float lastJumpPressedTime = float.MinValue;  // 점프 버튼을 눌렀던 마지막 시간
+    [SerializeField] private float lastGroundedTime = float.MinValue;     // 지면에 있었던 마지막 시간
+    [SerializeField] private float lastJumpPressedTime = float.MinValue;  // 점프 버튼을 눌렀던 마지막 시간
 
     private void Awake()
     {
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         if (jumpButtonReleased)
         {
             // 1) 착지 직전 - 점프 버퍼링
-            if (Time.time - lastJumpPressedTime <= player.jumpSettings.jumpBufferTime && isGrounded)
+            if (isGrounded && Time.time - lastJumpPressedTime < player.jumpSettings.jumpBufferTime)
             {
                 ExecuteJump();
                 return;
@@ -56,12 +56,14 @@ public class PlayerController : MonoBehaviour
             if (isGrounded)
             {
                 ExecuteJump();
+                return;
             }
 
             // 3) 착지 직후 - 코요테 타임 점프
-            else if (Time.time - lastGroundedTime <= player.jumpSettings.coyoteTime)
+            else if (Time.time - lastGroundedTime < player.jumpSettings.coyoteTime)
             {
                 ExecuteJump();
+                return;
             }
         }
     }
@@ -86,7 +88,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void ExecuteJump()
-    {
+    {       
         // 누른 시간 비율 계산
         float t = Mathf.Clamp01(holdTime / player.jumpSettings.maxHoldTime);
         float jumpForce = Mathf.Lerp(player.jumpSettings.minForce, player.jumpSettings.maxForce, t);
@@ -97,9 +99,11 @@ public class PlayerController : MonoBehaviour
         holdTime = 0f;
 
         jumpButtonReleased = false;
+
+        SoundManager.Instance.PlaySFX(AudioClipNames.Jump);
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (GameManager.Instance.IsGameStarted == false ||
             GameManager.Instance.IsGameOver == true)

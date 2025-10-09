@@ -1,6 +1,5 @@
 using UnityEngine;
 using Manager;
-using System.Collections.Generic;
 
 public class MovePlatform : MonoBehaviour
 {
@@ -8,9 +7,20 @@ public class MovePlatform : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private Coin[] coins;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        coins = GetComponentsInChildren<Coin>();
+    }
+
+    private void OnEnable()
+    {
+        foreach (var coin in coins)
+        {
+            coin.gameObject.SetActive(true);
+        }
     }
 
     private void Start()
@@ -20,7 +30,7 @@ public class MovePlatform : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!PlatformManager.Instance.CanMovePlatform)
+        if (GameManager.Instance.IsGameStarted == false || GameManager.Instance.IsGameOver == true)
             return;
 
         rb.MovePosition(rb.position + Vector2.left * speed * Time.fixedDeltaTime);

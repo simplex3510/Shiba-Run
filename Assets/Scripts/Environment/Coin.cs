@@ -18,27 +18,22 @@ public class Coin : MonoBehaviour
 {
     public AnimIntParam CoinType { get; private set; }
 
-    [SerializeField] private Animator animator;
-
-    private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     [SerializeField] private CoinTypes type;
 
-    private const int BRONZE_COIN_SCORE = 30;
-    private const int SILVER_COIN_SCORE = 50;
-    private const int GOLD_COIN_SCORE = 100;
+    private const int BRONZE_COIN_SCORE = 50;
+    private const int SILVER_COIN_SCORE = 100;
+    private const int GOLD_COIN_SCORE = 150;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-
         CoinType = new AnimIntParam(animator, "CoinType");
     }
 
     private void OnEnable()
     {
-        // MEMO: NONE 타입일 때 애니메이션 처리
         SetCoinType();
     }
 
@@ -47,30 +42,22 @@ public class Coin : MonoBehaviour
         // 백분률 계산
         int whatType = Random.Range(0, 100) + 1;
 
-        // 35%
-        if (whatType <= 35)
-        {
-            type = CoinTypes.None;
-            spriteRenderer.enabled = false;
-            return;
-        }
-        // 30%
-        else if (whatType <= 60)
+        // 40%
+        if (whatType <= 40)
         {
             type = CoinTypes.Bronze;
         }
-        // 20%
-        else if (whatType <= 80)
+        // 35%
+        else if (whatType <= 75)
         {
             type = CoinTypes.Silver;
         }
-        // 15%
+        // 25%
         else
         {
             type = CoinTypes.Gold;
         }
 
-        spriteRenderer.enabled = true;
         animator.SetInteger("CoinType", (int)type);
     }
 
@@ -78,8 +65,6 @@ public class Coin : MonoBehaviour
     {
         switch (type)
         {
-            case CoinTypes.None:
-                return 0;
             case CoinTypes.Bronze:
                 return BRONZE_COIN_SCORE;
             case CoinTypes.Silver:
@@ -103,6 +88,8 @@ public class Coin : MonoBehaviour
                 return;
             }
             GameManager.Instance.AddScore(coinScore);
+
+            SoundManager.Instance.PlaySFX(AudioClipNames.Coin);
 
             gameObject.SetActive(false);
         }

@@ -10,20 +10,23 @@ namespace Manager
     {
         public enum SceneNames
         {
-            MainMenuScene = 0,
+            CoreScene = 0,
+            MainMenuScene,
             MainGameScene,
             CreditScene,
         }
 
         public bool IsLoadedMainGameScene { get; private set; } = false;
 
-        private AsyncOperation preloadMenuOperation = null;
-        private AsyncOperation preloadGameOperation = null;
+        private AsyncOperation preloadMainMenuSceneOperation = null;
+        private AsyncOperation preloadMainGameSceneOperation = null;
 
         private void Start()
         {
+            SoundManager.Instance.PlayBGM(AudioClipNames.MainMenuBGM);
+            StartCoroutine(PreloadSceneAsync(SceneNames.MainMenuScene, LoadSceneMode.Additive, true));
+
             StartCoroutine(PreloadSceneAsync(SceneNames.MainGameScene, LoadSceneMode.Additive, false));
-            SceneManager.LoadScene((int)SceneNames.MainMenuScene);
         }
 
         private IEnumerator PreloadSceneAsync(SceneNames sceneName, LoadSceneMode mode, bool activateOnLoad = true)
@@ -37,11 +40,11 @@ namespace Manager
             switch (sceneName)
             {
                 case SceneNames.MainMenuScene:
-                    preloadMenuOperation = preloadOperation;
+                    preloadMainMenuSceneOperation = preloadOperation;
                     break;
 
                 case SceneNames.MainGameScene:
-                    preloadGameOperation = preloadOperation;
+                    preloadMainGameSceneOperation = preloadOperation;
                     break;
             }
 
@@ -49,8 +52,6 @@ namespace Manager
             {
                 yield return null;
             }
-
-            
 
             yield break;
         }
@@ -104,7 +105,6 @@ namespace Manager
             }
         }
 
-
         public void LoadScene(SceneNames scene)
         {
             SceneManager.LoadScene((int)scene);
@@ -118,14 +118,16 @@ namespace Manager
 
         public void ActivatePreloadedMainGameScene()
         {
-            if (preloadOperation == null)
+            if (preloadMainGameSceneOperation == null)
                 return;
 
-            HideScene();
+            HideScene(SceneNames.MainMenuScene);
 
-            preloadOperation.allowSceneActivation = true;
+            preloadMainGameSceneOperation.allowSceneActivation = true;
 
             IsLoadedMainGameScene = true;
+
+            SoundManager.Instance.PlayBGM(AudioClipNames.MainGameBGM);
         }
     }
 }

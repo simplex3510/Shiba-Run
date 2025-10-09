@@ -134,7 +134,7 @@ Rigidbody2D:
   m_Mass: 1.1853981
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.25
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -245,8 +245,8 @@ MonoBehaviour:
     minForce: 5
     maxForce: 10
     maxHoldTime: 0.5
-    coyoteTime: 0.1
-    jumpBufferTime: 0.1
+    coyoteTime: 0.15
+    jumpBufferTime: 0.15
   rb: {fileID: 2409709118105963703}
 --- !u!114 &6842651615053213358
 MonoBehaviour:
@@ -260,6 +260,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f490947f21ca28e43946ca561493d05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpButtonReleased: 0
+  isGrounded: 1
+  isCharging: 0
+  holdTime: 0
+  lastGroundedTime: 0
+  lastJumpPressedTime: 0
 --- !u!114 &4390158850495914748
 MonoBehaviour:
   m_ObjectHideFlags: 0
