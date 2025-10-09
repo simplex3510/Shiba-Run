@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlatformSpawner
   platforms: []
   platformPrefab: {fileID: 5311678348121579199, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
-  spawnCycleTime: 10
+  spawnCycleTime: 1.5
   spawnPositionX: 16
   spawnPlatformCount: 2
   maxHeight: -4
@@ -113,13 +113,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (0)
       objectReference: {fileID: 0}
+    - target: {fileID: 3225947205228365431, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7995376721463765793, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7995376721463765793, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7995376721463765793, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -175,13 +179,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3225947205228365431, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7995376721463765793, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7995376721463765793, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7995376721463765793, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -237,13 +245,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3225947205228365431, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7995376721463765793, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7995376721463765793, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7995376721463765793, guid: e1cd21679fd8e714ca935bd4d184dc6a, type: 3}
       propertyPath: m_LocalPosition.z

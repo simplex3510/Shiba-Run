@@ -45,20 +45,20 @@ public class PlayerController : MonoBehaviour
 
         if (jumpButtonReleased)
         {
-            // 1) 점프 버퍼링
-            if (Time.time - lastJumpPressedTime <= player.jumpSettings.jumpBufferTime &&
-                isGrounded)
+            // 1) 착지 직전 - 점프 버퍼링
+            if (Time.time - lastJumpPressedTime <= player.jumpSettings.jumpBufferTime && isGrounded)
             {
                 ExecuteJump();
                 return;
             }
 
-            // 2) 땅 위에서 점프
+            // 2) 착지 중 - 땅 위에서 점프
             if (isGrounded)
             {
                 ExecuteJump();
             }
-            // 2) 코요테 타임 점프
+
+            // 3) 착지 직후 - 코요테 타임 점프
             else if (Time.time - lastGroundedTime <= player.jumpSettings.coyoteTime)
             {
                 ExecuteJump();

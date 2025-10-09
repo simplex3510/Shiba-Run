@@ -14,8 +14,6 @@ namespace Manager
         [Header("Move Setting")]
         [SerializeField] private float speed = 5.0f;
 
-
-
         void Start()
         {
             StartCoroutine(WaitGameStart());

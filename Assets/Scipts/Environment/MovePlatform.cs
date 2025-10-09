@@ -8,16 +8,9 @@ public class MovePlatform : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    [SerializeField] private Coin coin;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        if (coin == null)
-        {
-            coin = GetComponentInChildren<Coin>();
-        }
     }
 
     private void Start()

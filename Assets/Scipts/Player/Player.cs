@@ -1,4 +1,6 @@
+using Manager;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [System.Serializable]
 public class JumpSettings
@@ -19,10 +21,26 @@ public class Player : MonoBehaviour
     [Header("References")]
     public Rigidbody2D rb;
 
+    private PlayerInput playerInput;
+
     private void Awake()
     {
         // 자동으로 Rigidbody2D 참조 연결
-        rb = GetComponent<Rigidbody2D>();
+        if (!rb)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
+
+        playerInput = GetComponent<PlayerInput>();
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.IsGameStarted)
+        {
+            playerInput.enabled = true;
+            this.enabled = false;
+        }
     }
 
     void OnCollisionStay2D(Collision2D collision)

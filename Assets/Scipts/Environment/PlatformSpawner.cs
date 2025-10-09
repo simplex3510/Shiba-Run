@@ -13,9 +13,10 @@ public class PlatformSpawner : MonoBehaviour
 
     [Header("Platform Spawn Setting")]
     private float spawnTimer = float.MaxValue;
+    [Range(1.0f, 5.0f)]
     [SerializeField] private float spawnCycleTime;
     [SerializeField] private float spawnPositionX;
-    [SerializeField] private int spawnPlatformCount;
+    // [SerializeField] private int spawnPlatformCount;
 
     [Header("Reposition Setting")]
     [SerializeField] private float maxHeight;
@@ -28,7 +29,6 @@ public class PlatformSpawner : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(platforms.Count);
         if (platforms.Count > 0)
         {
             foreach (var platform in platforms)

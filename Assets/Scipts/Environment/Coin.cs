@@ -30,6 +30,7 @@ public class Coin : MonoBehaviour
 
     private void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
 
         CoinType = new AnimIntParam(animator, "CoinType");
@@ -50,6 +51,8 @@ public class Coin : MonoBehaviour
         if (whatType <= 35)
         {
             type = CoinTypes.None;
+            spriteRenderer.enabled = false;
+            return;
         }
         // 30%
         else if (whatType <= 60)
@@ -67,32 +70,25 @@ public class Coin : MonoBehaviour
             type = CoinTypes.Gold;
         }
 
+        spriteRenderer.enabled = true;
         animator.SetInteger("CoinType", (int)type);
-        //CoinType.IntValue = (int)type;
     }
 
     private int GetScoreByType()
     {
-        int score = 0;
-
         switch (type)
         {
+            case CoinTypes.None:
+                return 0;
             case CoinTypes.Bronze:
-                score = BRONZE_COIN_SCORE;
-                break;
+                return BRONZE_COIN_SCORE;
             case CoinTypes.Silver:
-                score = SILVER_COIN_SCORE;
-                break;
+                return SILVER_COIN_SCORE;
             case CoinTypes.Gold:
-                score = GOLD_COIN_SCORE;
-                break;
-
-            default:
-                Debug.LogError("Error: Undefined Coin Type");
-                return -1;
+                return GOLD_COIN_SCORE;
         }
 
-        return score;
+        return -1;
     }
 
     // 플레이어가 코인과 충돌했을 때
@@ -101,6 +97,11 @@ public class Coin : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             int coinScore = GetScoreByType();
+            if (coinScore < 0)
+            {
+                Debug.LogError("Error: Does Not Add Score by Coin Type");
+                return;
+            }
             GameManager.Instance.AddScore(coinScore);
 
             gameObject.SetActive(false);
