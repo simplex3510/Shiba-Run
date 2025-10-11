@@ -14,29 +14,21 @@ public class CameraMoveController : MonoBehaviour
     private void Start()
     {
         transform.position = startPoint;
-        StartCoroutine(CheckSceneLoaded());
-    }
-
-    private IEnumerator CheckSceneLoaded()
-    {
-        while (!GameSceneManager.Instance.IsLoadedMainGameScene)
-        {
-            yield return null;
-        }
-
         StartCoroutine(MoveCamera());
-        yield break;
     }
 
     private IEnumerator MoveCamera()
     {
-        Vector3 velocity = Vector3.zero;
+        while (!GameManager.Instance.IsClickedStartButton)
+        {
+            yield return null;
+        }
 
+        Vector3 velocity = Vector3.zero;
         while ((transform.position - endPoint).magnitude > 0.01f)
         {
             transform.position = Vector3.SmoothDamp(transform.position, endPoint, ref velocity, smoothTime);
-
-            yield return null; // 다음 프레임까지 대기
+            yield return null;
         }
 
         transform.position = endPoint; // 정확히 목표 위치 고정

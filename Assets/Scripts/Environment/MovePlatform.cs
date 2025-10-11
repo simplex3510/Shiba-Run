@@ -4,6 +4,7 @@ using Manager;
 public class MovePlatform : MonoBehaviour
 {
     private float speed;
+    private Vector2 velocity;
 
     private Rigidbody2D rb;
 
@@ -26,14 +27,19 @@ public class MovePlatform : MonoBehaviour
     private void Start()
     {
         speed = PlatformManager.Instance.Speed;
+        velocity = Vector2.left * speed;
     }
 
     private void FixedUpdate()
     {
         if (GameManager.Instance.IsGameStarted == false || GameManager.Instance.IsGameOver == true)
-            return;
-
-        rb.MovePosition(rb.position + Vector2.left * speed * Time.fixedDeltaTime);
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+        else
+        {
+            rb.linearVelocity = velocity;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)

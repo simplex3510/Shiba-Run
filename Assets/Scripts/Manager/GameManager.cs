@@ -21,19 +21,22 @@ namespace Manager
 
         public float Score { get; private set; } = 0.0f;
 
-        #region Game State
-        public bool IsGameStarted { get { return isGameStarted; } set { isGameStarted = value; } }
-        public bool IsGameOver { get { return isGameOver; } set { isGameOver = value; } }
-
-        [SerializeField, ReadOnlyField] private bool isGameOver = false;
-        
-        [SerializeField, ReadOnlyField] private bool isGameStarted = false;
+        #region Menu UI
+        public bool IsClickedStartButton { get { return isClickedStartButton; } }
+        [SerializeField, ReadOnlyField] private bool isClickedStartButton = false;
         #endregion
 
         #region Game UI
         private TextMeshProUGUI scoreText;
         #endregion
 
+        #region Game State
+        public bool IsGameStarted { get { return isGameStarted; } }
+        public bool IsGameOver { get { return isGameOver; } }
+
+        [SerializeField, ReadOnlyField] private bool isGameOver = false;
+        [SerializeField, ReadOnlyField] private bool isGameStarted = false;
+        #endregion
 
         [SerializeField] private float waitTime = 3.0f;
 
@@ -57,7 +60,7 @@ namespace Manager
 
         private void Update()
         {
-            if (!GameSceneManager.Instance.IsLoadedMainGameScene)
+            if (!isClickedStartButton)
                 return;
 
             if (!IsGameOver)
@@ -67,7 +70,7 @@ namespace Manager
                     waitTime -= Time.deltaTime;
                     if (waitTime < 0.0f)
                     {
-                        IsGameStarted = true;
+                        isGameStarted = true;
                     }
                 }
                 else
@@ -87,8 +90,20 @@ namespace Manager
 
         public void SetGameOver()
         {
-            IsGameOver = true;
+            isGameOver = true;
         }
+
+        #region Menu Button CallBacks
+        public void OnClickStartButton()
+        {
+            isClickedStartButton = true;
+        }
+
+        public void OnClickExitButton()
+        {
+            QuitGame();
+        }
+        #endregion
 
         #region Score Method
         public void AddScore(int score)
@@ -137,7 +152,7 @@ namespace Manager
             }
             else
             {
-                Debug.LogWarning("ScoreText is not allocated.");
+                Debug.LogError("ScoreText is not allocated.");
             }
         }
         #endregion

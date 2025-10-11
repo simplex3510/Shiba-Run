@@ -6,10 +6,19 @@ public class MoveBackground : MonoBehaviour
     private float speed;
     private float width;
 
+    private Vector2 startPosition;
+
     private void Awake()
     {
         float scaleFactor = transform.localScale.x;
         width = GetComponent<SpriteRenderer>().size.x * scaleFactor;
+
+        startPosition = transform.position;
+    }
+
+    private void OnEnable()
+    {
+        transform.position = startPosition;        
     }
 
     private void Start()
