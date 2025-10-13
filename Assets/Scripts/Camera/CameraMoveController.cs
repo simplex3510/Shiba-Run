@@ -11,10 +11,9 @@ public class CameraMoveController : MonoBehaviour
 
     public float smoothTime = 0.25f; // 감속 시간 조절
 
-    private void Start()
+    private void Awake()
     {
-        transform.position = startPoint;
-        StartCoroutine(MoveCamera());
+        GameManager.Instance.OnInitializeGame += Initialize;
     }
 
     private IEnumerator MoveCamera()
@@ -33,5 +32,11 @@ public class CameraMoveController : MonoBehaviour
 
         transform.position = endPoint; // 정확히 목표 위치 고정
         yield break;
+    }
+
+    public void Initialize()
+    {
+        transform.position = startPoint;
+        StartCoroutine(MoveCamera());
     }
 }

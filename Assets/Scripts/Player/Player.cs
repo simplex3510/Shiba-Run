@@ -23,8 +23,12 @@ public class Player : MonoBehaviour
 
     private PlayerInput playerInput;
 
+    private Vector2 initialPosition;
+
     private void Awake()
     {
+        initialPosition = transform.position;
+
         // 자동으로 Rigidbody2D 참조 연결
         if (!rb)
         {
@@ -32,6 +36,8 @@ public class Player : MonoBehaviour
         }
 
         playerInput = GetComponent<PlayerInput>();
+
+        GameManager.Instance.OnInitializeGame += Initialize;
     }
 
     private void Update()
@@ -39,15 +45,13 @@ public class Player : MonoBehaviour
         if (GameManager.Instance.IsGameStarted)
         {
             playerInput.enabled = true;
-            this.enabled = false;
+            enabled = false;
         }
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    public void Initialize()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            rb.linearVelocity = new Vector2(0.0f, rb.linearVelocityY);
-        }
+        transform.position = initialPosition;
+        gameObject.SetActive(true);
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Manager;
+using UnityEngine.UI;
 
 /* Memo
 * 1. 나중에 UI에서 점프력 게이지를 표시하려면 holdTime을 퍼센트로 변환하는 로직이 필요함
@@ -12,18 +13,23 @@ public class PlayerController : MonoBehaviour
 {
     private Player player;
 
-    [SerializeField] private bool jumpButtonReleased = false;
+    [SerializeField, ReadOnlyField] private bool jumpButtonReleased = false;
 
-    [SerializeField] private bool isGrounded = true;
-    [SerializeField] private bool isCharging = false;
-    [SerializeField] private float holdTime = 0f;
+    [SerializeField, ReadOnlyField] private bool isGrounded = true;
+    [SerializeField, ReadOnlyField] private bool isCharging = false;
+    [SerializeField, ReadOnlyField] private float holdTime = 0f;
 
-    [SerializeField] private float lastGroundedTime = float.MinValue;     // 지면에 있었던 마지막 시간
-    [SerializeField] private float lastJumpPressedTime = float.MinValue;  // 점프 버튼을 눌렀던 마지막 시간
+    [SerializeField, ReadOnlyField] private float lastGroundedTime = float.MinValue;     // 지면에 있었던 마지막 시간
+    [SerializeField, ReadOnlyField] private float lastJumpPressedTime = float.MinValue;  // 점프 버튼을 눌렀던 마지막 시간
+
+    #region Jump Guage UI
+    [SerializeField] Slider jumpGaugeSlider;
+    #endregion
 
     private void Awake()
     {
         player = GetComponent<Player>();
+        GameManager.Instance.OnInitializeGame += Initialize;
     }
 
     private void Update()
@@ -64,7 +70,19 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    private void FixedUpdate()
+    {
+        player.rb.linearVelocity = new Vector2(0f, player.rb.linearVelocity.y);
+    }
 
+    private void LateUpdate()
+    {
+        if (jumpGaugeSlider == null)
+            return;
+
+        // 점프 게이지 UI 업데이트
+        jumpGaugeSlider.value = Mathf.Clamp01(holdTime / player.jumpSettings.maxHoldTime);
+    }
 
     // PlayerInput 컴포넌트가 Jump 액션을 호출할 때 실행됨
     public void OnJump(InputAction.CallbackContext context)
@@ -85,12 +103,12 @@ public class PlayerController : MonoBehaviour
     }
 
     private void ExecuteJump()
-    {       
+    {
         // 누른 시간 비율 계산
         float t = Mathf.Clamp01(holdTime / player.jumpSettings.maxHoldTime);
         float jumpForce = Mathf.Lerp(player.jumpSettings.minForce, player.jumpSettings.maxForce, t);
 
-        player.rb.linearVelocity = new Vector2(player.rb.linearVelocityX, jumpForce);
+        player.rb.linearVelocity = new Vector2(0f, jumpForce);
         isGrounded = false;
         isCharging = false;
         holdTime = 0f;
@@ -102,10 +120,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (GameManager.Instance.IsGameStarted == false ||
-            GameManager.Instance.IsGameOver == true)
-            return;
-
         if (collision.gameObject.CompareTag("Ground"))
         {
             foreach (ContactPoint2D contact in collision.contacts)
@@ -117,7 +131,27 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
 
-        isGrounded = false;
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
+
+    public void Initialize()
+    {
+        isGrounded = true;
+        isCharging = false;
+        holdTime = 0f;
+        jumpButtonReleased = false;
+
+        lastGroundedTime = float.MinValue;
+        lastJumpPressedTime = float.MinValue;
+
+        if (jumpGaugeSlider != null)
+            jumpGaugeSlider.value = 0f;
     }
 }

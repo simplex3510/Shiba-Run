@@ -10,13 +10,13 @@ public class MovePlatform : MonoBehaviour
 
     private Coin[] coins;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         coins = GetComponentsInChildren<Coin>();
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         foreach (var coin in coins)
         {
@@ -24,29 +24,44 @@ public class MovePlatform : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         speed = PlatformManager.Instance.Speed;
         velocity = Vector2.left * speed;
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        if (GameManager.Instance.IsGameStarted == false || GameManager.Instance.IsGameOver == true)
+        if (GameManager.Instance.IsGameStarted == true)
         {
-            rb.linearVelocity = Vector2.zero;
-        }
-        else
-        {
-            rb.linearVelocity = velocity;
+            if (GameManager.Instance.IsGameOver == true)
+            {
+                rb.linearVelocity = Vector2.down * speed;
+                return;
+            }
+            else
+            {
+                rb.linearVelocity = velocity;
+                return;
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("DeadZone"))
+        {
+            rb.linearVelocity = Vector2.zero;
+            gameObject.SetActive(false);
+        }
+    }
+
+    protected virtual void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("RepositionZone"))
         {
-            this.gameObject.SetActive(false);
+            rb.linearVelocity = Vector2.zero;
+            gameObject.SetActive(false);
         }
     }
 }

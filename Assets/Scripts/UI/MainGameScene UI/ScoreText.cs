@@ -5,8 +5,8 @@ using TMPro;
 
 public class ScoreText : MonoBehaviour
 {
-    private void OnEnable()
-    {
-        GameManager.Instance.AllocateScoreUI(GetComponent<TextMeshProUGUI>());
-    }
+    // // private void OnEnable()
+    // {
+    //     GameManager.Instance.AllocateScoreUI(GetComponent<TextMeshProUGUI>());
+    // }
 }

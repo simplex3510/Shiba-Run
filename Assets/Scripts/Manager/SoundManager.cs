@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Singleton;
 
+[System.Serializable]
 public enum AudioClipNames : int
 {
     None = 0,
@@ -29,22 +30,25 @@ namespace Manager
 {
     public class SoundManager : SingletonBase<SoundManager>
     {
+        public bool Initialized { get; private set; } = false;
+
         [Header("Global Volume Settings")]
         [Range(0f, 1f)] [SerializeField] private float bgmVolume = 0.5f;
         [Range(0f, 1f)] [SerializeField] private float sfxVolume = 1.0f;
 
-        [Header("Audio Clips")]
+        [Header("Sound Resources")]
         public List<Sound> sounds;
         private Dictionary<AudioClipNames, Sound> soundDict;
 
-        private AudioSource bgmSource;
-        private AudioSource sfxSource;
+        [Header("Audio Sources")]
+        private AudioSource bgmAudioSource;
+        private AudioSource sfxAudioSource;
 
         private void Awake()
         {
             AudioSource[] audioSources = GetComponents<AudioSource>();
-            bgmSource = audioSources[0];
-            sfxSource = audioSources[1];
+            bgmAudioSource = audioSources[0];
+            sfxAudioSource = audioSources[1];
 
             soundDict = new Dictionary<AudioClipNames, Sound>();
             foreach (Sound sound in sounds)
@@ -54,34 +58,49 @@ namespace Manager
                     soundDict.Add(sound.AudioClipNames, sound);
                 }
             }
+
+            Initialized = true;
         }
 
         public void PlayBGM(AudioClipNames clipName)
         {
-            StopBGM();
-
             if (clipName == AudioClipNames.None || !soundDict.ContainsKey(clipName))
                 return;
 
+            if (bgmAudioSource == null)
+                return;
+
+            if (bgmAudioSource.isPlaying)
+            {
+                StopBGM();
+                StopSFX();
+            }
+
             Sound sound = soundDict[clipName];
-            bgmSource.clip = sound.clip;
-            bgmSource.volume = sound.volume * bgmVolume;
-            bgmSource.loop = sound.loop;
-            bgmSource.Play();
+            bgmAudioSource.clip = sound.clip;
+            bgmAudioSource.volume = sound.volume * bgmVolume;
+            bgmAudioSource.loop = sound.loop;
+            bgmAudioSource.Play();
         }
 
         public void StopBGM()
         {
-            bgmSource.Stop();
+            bgmAudioSource.Stop();
         }
 
-        public void PlaySFX(AudioClipNames clipName)
+        public void StopSFX()
+        {
+            sfxAudioSource.Stop();
+        }
+
+        public float PlaySFX(AudioClipNames clipName)
         {
             if (clipName == AudioClipNames.None || !soundDict.ContainsKey(clipName))
-                return;
+                return 0f;
 
             Sound sound = soundDict[clipName];
-            sfxSource.PlayOneShot(sound.clip, sound.volume * sfxVolume);
+            sfxAudioSource.PlayOneShot(sound.clip, sound.volume * sfxVolume);
+            return sound.clip.length;
         }
     }
 }

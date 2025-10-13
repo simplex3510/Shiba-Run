@@ -1,7 +1,8 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using Singleton;
+using UnityEngine.UI;
 using TMPro;
+using Singleton;
+using System.Threading.Tasks;
 
 namespace Manager
 {
@@ -17,20 +18,27 @@ namespace Manager
 
     public class GameManager : SingletonBase<GameManager>
     {
+        public delegate void OnInitialize();
+        public OnInitialize OnInitializeGame;
+
         public GamePhases GamePhase { get; private set; } = GamePhases.SlowPhase;
 
         public float Score { get; private set; } = 0.0f;
 
         #region Menu UI
+        [Header("Menu UI")]
         public bool IsClickedStartButton { get { return isClickedStartButton; } }
         [SerializeField, ReadOnlyField] private bool isClickedStartButton = false;
         #endregion
 
         #region Game UI
-        private TextMeshProUGUI scoreText;
+        [Header("Game UI")]
+        [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private GameObject titleButton;
         #endregion
 
         #region Game State
+        [Header("Game State")]
         public bool IsGameStarted { get { return isGameStarted; } }
         public bool IsGameOver { get { return isGameOver; } }
 
@@ -42,6 +50,7 @@ namespace Manager
 
         public PlayerInputActions inputActions;
 
+        #region Unity Callbacks
         private void Awake()
         {
             // Input System 초기화
@@ -54,8 +63,10 @@ namespace Manager
 
         private void Start()
         {
-            float randomSeed = System.DateTime.Now.Ticks;
-            Random.InitState((int)randomSeed);
+            OnInitializeGame += Initialize;
+
+            int seed = System.Environment.TickCount;
+            Random.InitState(seed);
         }
 
         private void Update()
@@ -71,6 +82,7 @@ namespace Manager
                     if (waitTime < 0.0f)
                     {
                         isGameStarted = true;
+                        Debug.Log("Game Started");
                     }
                 }
                 else
@@ -87,15 +99,49 @@ namespace Manager
             inputActions.Dev.Exit.performed -= _ => QuitGame();
             inputActions.Dev.Disable();
         }
+        #endregion
 
-        public void SetGameOver()
+        public void Initialize()
+        {
+
+            isClickedStartButton = false;
+            isGameOver = false;
+            isGameStarted = false;
+            waitTime = 3.0f;
+            Score = 0.0f;
+
+            titleButton.SetActive(false);
+        }
+
+        public async void SetGameOver()
         {
             isGameOver = true;
+
+            SoundManager.Instance.StopBGM();
+            float delayTime = SoundManager.Instance.PlaySFX(AudioClipNames.GameSet);
+
+            await Task.Delay((int)(delayTime * 1000));
+
+            titleButton.SetActive(true);
+        }
+
+        private void QuitGame()
+        {
+#if UNITY_EDITOR
+            // 에디터에서 테스트 시
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            // 빌드 시
+            Application.Quit();
+#endif
+            Debug.Log("Game exited (alpha version).");
         }
 
         #region Menu Button CallBacks
         public void OnClickStartButton()
         {
+            OnInitializeGame?.Invoke();
+
             isClickedStartButton = true;
         }
 
@@ -157,16 +203,5 @@ namespace Manager
         }
         #endregion
 
-        private void QuitGame()
-        {
-#if UNITY_EDITOR
-            // 에디터에서 테스트 시
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            // 빌드 시
-            Application.Quit();
-#endif
-            Debug.Log("Game exited (alpha version).");
-        }
     }
 }
