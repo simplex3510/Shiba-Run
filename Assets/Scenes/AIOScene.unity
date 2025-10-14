@@ -2921,7 +2921,7 @@ MonoBehaviour:
   - AudioClipNames: 5
     clip: {fileID: 8300000, guid: 90a7d8dd98772994b8cffac5f93a9500, type: 3}
     loop: 0
-    volume: 2.5
+    volume: 2
   - AudioClipNames: 2
     clip: {fileID: 8300000, guid: bc3a5108eb43c044da1491d7ba38d2d2, type: 3}
     loop: 0

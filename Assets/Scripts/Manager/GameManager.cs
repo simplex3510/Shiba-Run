@@ -108,6 +108,8 @@ namespace Manager
             isGameOver = false;
             isGameStarted = false;
             waitTime = 3.0f;
+
+            scoreText.text = "Score: 0";
             Score = 0.0f;
 
             titleButton.SetActive(false);

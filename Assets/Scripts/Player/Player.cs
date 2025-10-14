@@ -1,6 +1,8 @@
-using Manager;
+using System.Collections;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Manager;
 
 [System.Serializable]
 public class JumpSettings
@@ -40,18 +42,29 @@ public class Player : MonoBehaviour
         GameManager.Instance.OnInitializeGame += Initialize;
     }
 
-    private void Update()
+    private void Start()
     {
-        if (GameManager.Instance.IsGameStarted)
+        StartCoroutine(EnablePlayerInput());
+    }
+
+    private IEnumerator EnablePlayerInput()
+    {
+        while (!GameManager.Instance.IsGameStarted)
         {
-            playerInput.enabled = true;
-            enabled = false;
+            yield return null;
         }
+
+        playerInput.enabled = true;
+
+        yield break;
     }
 
     public void Initialize()
     {
         transform.position = initialPosition;
         gameObject.SetActive(true);
+
+        playerInput.enabled = false;
+        StartCoroutine(EnablePlayerInput());
     }
 }
