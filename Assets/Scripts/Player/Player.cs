@@ -1,6 +1,8 @@
-using Manager;
+using System.Collections;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Manager;
 
 [System.Serializable]
 public class JumpSettings
@@ -23,8 +25,12 @@ public class Player : MonoBehaviour
 
     private PlayerInput playerInput;
 
+    private Vector2 initialPosition;
+
     private void Awake()
     {
+        initialPosition = transform.position;
+
         // 자동으로 Rigidbody2D 참조 연결
         if (!rb)
         {
@@ -32,22 +38,33 @@ public class Player : MonoBehaviour
         }
 
         playerInput = GetComponent<PlayerInput>();
+
+        GameManager.Instance.OnInitializeGame += Initialize;
     }
 
-    private void Update()
+    private void Start()
     {
-        if (GameManager.Instance.IsGameStarted)
-        {
-            playerInput.enabled = true;
-            this.enabled = false;
-        }
+        StartCoroutine(EnablePlayerInput());
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    private IEnumerator EnablePlayerInput()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        while (!GameManager.Instance.IsGameStarted)
         {
-            rb.linearVelocity = new Vector2(0.0f, rb.linearVelocityY);
+            yield return null;
         }
+
+        playerInput.enabled = true;
+
+        yield break;
+    }
+
+    public void Initialize()
+    {
+        transform.position = initialPosition;
+        gameObject.SetActive(true);
+
+        playerInput.enabled = false;
+        StartCoroutine(EnablePlayerInput());
     }
 }

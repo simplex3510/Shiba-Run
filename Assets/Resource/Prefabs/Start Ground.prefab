@@ -549,7 +549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2731643333969903388}
-  - component: {fileID: 3272069496622807515}
+  - component: {fileID: 7153823734360804435}
   - component: {fileID: 1086869952112660428}
   - component: {fileID: 5550264925494858556}
   m_Layer: 0
@@ -577,7 +577,7 @@ Transform:
   - {fileID: 8517144519101698642}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3272069496622807515
+--- !u!114 &7153823734360804435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,9 +586,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1798033613547462096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e692a746f7c694bad3d2fd18aeb0b9, type: 3}
+  m_Script: {fileID: 11500000, guid: e6c21166be9886d4eb282de5e83d7c23, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::StartPlatform
 --- !u!50 &1086869952112660428
 Rigidbody2D:
   serializedVersion: 5
@@ -615,7 +615,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 4
 --- !u!61 &5550264925494858556
 BoxCollider2D:
   m_ObjectHideFlags: 0

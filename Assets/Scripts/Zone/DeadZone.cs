@@ -1,16 +1,16 @@
 using Manager;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeadZone : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.SetGameOver();
+            other.gameObject.SetActive(false);
 
-            SoundManager.Instance.StopBGM();
-            SoundManager.Instance.PlaySFX(AudioClipNames.GameSet);
+            GameManager.Instance.SetGameOver();
         }
     }
 }

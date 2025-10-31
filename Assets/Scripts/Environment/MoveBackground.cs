@@ -6,15 +6,23 @@ public class MoveBackground : MonoBehaviour
     private float speed;
     private float width;
 
+    private Vector2 startPosition;
+
     private void Awake()
     {
         float scaleFactor = transform.localScale.x;
         width = GetComponent<SpriteRenderer>().size.x * scaleFactor;
+
+        startPosition = transform.position;
+
+        speed = PlatformManager.Instance.Speed;
+
+        GameManager.Instance.OnInitializeGame += Initialize;
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        speed = PlatformManager.Instance.Speed;
+        transform.position = startPosition;        
     }
 
     private void FixedUpdate()
@@ -22,7 +30,7 @@ public class MoveBackground : MonoBehaviour
         if (GameManager.Instance.IsGameStarted == false || GameManager.Instance.IsGameOver == true)
             return;
 
-        transform.Translate(Vector2.left * speed * Time.fixedDeltaTime);
+        transform.Translate(speed * Time.fixedDeltaTime * Vector2.left);
     }
 
     private void Update()
@@ -33,9 +41,14 @@ public class MoveBackground : MonoBehaviour
         Reposition();
     }
 
-        private void Reposition()
+    private void Reposition()
     {
         Vector2 offset = new Vector2(width * 2, 0);
         transform.position = (Vector2)transform.position + offset;
+    }
+
+    public void Initialize()
+    {
+        transform.position = startPosition;
     }
 }

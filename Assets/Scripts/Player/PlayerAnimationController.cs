@@ -20,9 +20,11 @@ public class PlayerAnimationController : MonoBehaviour
         JumpTrigger = new AnimTriggerParam(PlayerAnimator, "JumpTrigger");
         WalkTrigger = new AnimTriggerParam(PlayerAnimator, "WalkTrigger");
         RunTrigger = new AnimTriggerParam(PlayerAnimator, "RunTrigger");
+
+        GameManager.Instance.OnInitializeGame += Initialize;
     }
 
-    private void Start()
+    public void Initialize()
     {
         StartCoroutine(WaitGameStart());
     }

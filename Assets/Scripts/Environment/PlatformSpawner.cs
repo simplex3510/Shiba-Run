@@ -12,7 +12,7 @@ public class PlatformSpawner : MonoBehaviour
     [SerializeField] private MovePlatform platformPrefab;
 
     [Header("Platform Spawn Setting")]
-    private float spawnTimer = float.MaxValue;
+    [SerializeField, ReadOnlyField] private float spawnTimer = float.MaxValue;
     [Range(1.0f, 5.0f)]
     [SerializeField] private float spawnCycleTime;
     [SerializeField] private float spawnPositionX;
@@ -25,6 +25,8 @@ public class PlatformSpawner : MonoBehaviour
     private void Awake()
     {
         platforms = GetComponentsInChildren<MovePlatform>().ToList();
+
+        GameManager.Instance.OnInitializeGame += Initialize;
     }
 
     private void Start()
@@ -51,15 +53,6 @@ public class PlatformSpawner : MonoBehaviour
         SpawnPlatform();
     }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            // 플랫폼 리포지셔닝
-            RepositionPlatform(other.gameObject);
-        }
-    }
-
     private void SpawnPlatform()
     {
         // 타이머 초기화
@@ -70,24 +63,30 @@ public class PlatformSpawner : MonoBehaviour
         {
             if (platforms[index].gameObject.activeSelf == false)
             {
+                RepositionPlatform(platforms[index].gameObject);
+
                 platforms[index].gameObject.SetActive(true);
                 return;
             }
         }
 
-        // 비활성화된 플랫폼이 없으면 새로 생성
-        Debug.Log("There is no available platform, spawning a new one.");
+        // 없으면 새로 생성
         MovePlatform platform = Instantiate(platformPrefab, this.transform);
         RepositionPlatform(platform.gameObject);
-        platform.gameObject.SetActive(true);
         platforms.Add(platform);
+        platform.gameObject.SetActive(true);
 
         return;
     }
 
-    public void RepositionPlatform(GameObject platform)
+    private void RepositionPlatform(GameObject platform)
     {
         float randomY = Random.Range(minHeight, maxHeight);
         platform.transform.position = new Vector2(spawnPositionX, randomY);
+    }
+
+    private void Initialize()
+    {
+        spawnTimer = float.MaxValue;
     }
 }
