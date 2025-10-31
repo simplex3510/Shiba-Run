@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using Singleton;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Manager
 {
@@ -29,6 +30,7 @@ namespace Manager
         public bool IsClickedStartButton { get { return isClickedStartButton; } }
         [Header("Title UI")]
         [SerializeField, ReadOnlyField] private bool isClickedStartButton = false;
+        [SerializeField] private List<TMP_Text> Rankings;
         [SerializeField] private TMP_InputField verifyIDInputField;
         [SerializeField] private TMP_InputField verifyPWInputField;
         [SerializeField] private TMP_Text verifyScore;
@@ -38,6 +40,8 @@ namespace Manager
         #region Game UI
         [Header("Game UI")]
         [SerializeField] private TextMeshProUGUI scoreText;
+
+        [SerializeField] private GameObject gameOverUI;
 
         public TMP_InputField idInputField;
         public TMP_InputField pwInputField;
@@ -74,6 +78,8 @@ namespace Manager
 
             int seed = System.Environment.TickCount;
             Random.InitState(seed);
+
+            UpdateRankingsUI();
         }
 
         private void Update()
@@ -110,7 +116,6 @@ namespace Manager
 
         public void Initialize()
         {
-
             isClickedStartButton = false;
             isGameOver = false;
             isGameStarted = false;
@@ -118,6 +123,15 @@ namespace Manager
 
             scoreText.text = "Score: 0";
             Score = 0.0f;
+
+            idInputField.text = "";
+            pwInputField.text = "";
+            gameOverUI.SetActive(false);
+
+            verifyIDInputField.text = "";
+            verifyPWInputField.text = "";
+            verifyScore.text = "";
+            verifyRank.text = "";
         }
 
         public async void SetGameOver()
@@ -128,6 +142,8 @@ namespace Manager
             float delayTime = SoundManager.Instance.PlaySFX(AudioClipNames.GameSet);
 
             await Task.Delay((int)(delayTime * 1000));
+
+            gameOverUI.SetActive(true);
         }
 
         private void QuitGame()
@@ -208,5 +224,49 @@ namespace Manager
         }
         #endregion
 
+        #region Rankings UI
+        public void UpdateRankingsUI()
+        {
+            var top5 = RankManager.Instance.Ranks.GetRange
+            (
+                0,
+                Mathf.Min(5, RankManager.Instance.Ranks.Count)
+            );
+
+            for (int i = 0; i < Rankings.Count; i++)
+            {
+                if (i < top5.Count)
+                {
+                    var rank = top5[i];
+                    Rankings[i].text = $"#{rank.ID} : {Mathf.RoundToInt(rank.Score)}";
+                }
+                else
+                {
+                    Rankings[i].text = "No User : No Score";
+                }
+            }
+        }
+        #endregion
+
+        #region Verify UI
+        public void VerifyRankByAccount()
+        {
+            string id = verifyIDInputField.text;
+            string pw = verifyPWInputField.text;
+
+            var (score, rank) = RankManager.Instance.GetAccountInfo(id, pw);
+
+            if (0 <= score)
+            {
+                verifyScore.text = $"{Mathf.RoundToInt(score)}";
+                verifyRank.text = $"#{rank + 1}";
+            }
+            else
+            {
+                verifyScore.text = "-";
+                verifyRank.text = "-";
+            }
+        }
+        #endregion
     }
 }

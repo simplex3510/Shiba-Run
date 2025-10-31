@@ -1,5 +1,5 @@
-using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -25,52 +25,55 @@ namespace Manager
         }
     }
 
-    [System.Serializable]
-    public class DailyRank
-    {
-        public List<Rank> Ranks { get; set; } = new List<Rank>();
-    }
-
     public class RankManager : SingletonBase<RankManager>
     {
-        private Dictionary<string, DailyRank> dailyRankDic = new Dictionary<string, DailyRank>();
+        public List<Rank> Ranks { get; private set; } = new();
         private string savePath;
 
         private void Awake()
         {
             savePath = Path.Combine(Application.persistentDataPath, "rank.json");
-            Debug.Log($"[RankManager] Save Path: {savePath}");
             LoadRanks();
         }
 
+        #region Basic Rank Methods
         // 랭크 추가
         public void AddRank()
         {
-            string dailyKey = DateTime.Now.ToString("yyyyMMdd");
+            string id = GameManager.Instance.idInputField.text;
+            string pw = GameManager.Instance.pwInputField.text;
+            float score = GameManager.Instance.Score;
 
-            if (!dailyRankDic.TryGetValue(dailyKey, out var dailyRank))
+            if (id == "" || pw == "")
+                return;
+
+            // 기존 유저 검색
+            Rank user = Ranks.Find(r => r.ID == id);
+
+            if (user == null)
             {
-                dailyRank = new DailyRank();
-                dailyRankDic[dailyKey] = dailyRank;
+                // 신규 유저 등록
+                var newRank = new Rank(id, pw, score);
+                Ranks.Add(newRank);
+            }
+            else
+            {
+                // 점수 비교 후 높은 점수만 갱신
+                if (user.PW == pw && score > user.Score)
+                {
+                    user.Score = score;
+                }
             }
 
-            var rank = new Rank
-            (
-                GameManager.Instance.idInputField.text,
-                GameManager.Instance.pwInputField.text,
-                GameManager.Instance.Score
-            );
-
-            // rank is null
-            dailyRank.Ranks.Add(rank);
-
             SaveRanks();
+
+            SortRanks();
         }
 
         // JSON 저장
         public void SaveRanks()
         {
-            var json = JsonConvert.SerializeObject(dailyRankDic, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(Ranks, Formatting.Indented);
             File.WriteAllText(savePath, json);
         }
 
@@ -81,17 +84,59 @@ namespace Manager
                 return;
 
             string json = File.ReadAllText(savePath);
-            dailyRankDic = JsonConvert.DeserializeObject<Dictionary<string, DailyRank>>(json)
-                           ?? new Dictionary<string, DailyRank>();
-        }
-        
-        // 특정 날짜 랭크 조회
-        public List<Rank> GetRanksByDate(string yyyyMMdd)
-        {
-            if (dailyRankDic.TryGetValue(yyyyMMdd, out var dailyRank))
-                return dailyRank.Ranks;
+            Ranks = JsonConvert.DeserializeObject<List<Rank>>(json) ?? new List<Rank>();
 
-            return  new List<Rank>();
+            SortRanks();
         }
+        #endregion
+
+        #region Helper Methods
+        // 정렬 (내림차순)
+        private void SortRanks()
+        {
+            Ranks.Sort((a, b) => b.Score.CompareTo(a.Score));
+        }
+
+        // ID 중복 검사
+        public bool IsIdExists(string id)
+        {
+            return Ranks.Exists(r => r.ID == id);
+        }
+
+        // 계정 검색 (점수 + 랭킹 반환)
+        public (float score, int rank) GetAccountInfo(string id, string pw)
+        {
+            for (int i = 0; i < Ranks.Count; i++)
+            {
+                var r = Ranks[i];
+                if (r.ID == id && r.PW == pw)
+                {
+                    return (r.Score, i);
+                }
+            }
+
+            return (-1.0f, -1);
+        }
+
+        // 전체 랭킹 조회
+        public List<Rank> GetAllRanks() => new List<Rank>(Ranks);
+
+        // 상위 N명 조회
+        public List<Rank> GetTopRanks(int count = 5)
+        {
+            return Ranks.Count > count ? Ranks.GetRange(0, count) : new List<Rank>(Ranks);
+        }
+
+        // 전체 초기화
+        public async Task ClearRanksAsync()
+        {
+            Ranks.Clear();
+            if (File.Exists(savePath))
+                File.Delete(savePath);
+
+            await Task.Yield();
+            Debug.Log("[RankManager] 랭크 데이터 초기화 완료.");
+        }
+        #endregion
     }
 }
