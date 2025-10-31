@@ -31,10 +31,14 @@ namespace Singleton
 
         private void Awake()
         {
-            if (Instance != this)
+            if (instance != null && instance != this)
             {
                 Debug.LogError("Multiple instances of singleton detected!");
                 Destroy(this.gameObject);
+            }
+            else
+            {
+                instance = (T)this;
             }
         }
     }

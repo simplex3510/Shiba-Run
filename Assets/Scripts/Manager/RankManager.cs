@@ -1,86 +1,76 @@
-using System.Collections.Generic;
+using System;
 using System.IO;
+using System.Collections.Generic;
 
 using UnityEngine;
 
+using Newtonsoft.Json;
+
 using Singleton;
-using System;
 
 namespace Manager
 {
     [System.Serializable]
-    public class RankData
+    public class Rank
     {
-        public string ID { get; private set; }
-        public string PW { get; private set; }
+        public string ID { get; set; }
+        public string PW { get; set; }
+        public float Score { get; set; }
 
-        public float Score { get; private set; }
-
-        public DateTime Date { get; private set; }
-
-        public RankData(string id, string pw, float score, DateTime date)
+        public Rank(string id, string pw, float score)
         {
             ID = id;
             PW = pw;
             Score = score;
-            Date = date;
         }
     }
 
     [System.Serializable]
     public class DailyRank
     {
-        public string Date; // yyyyMMdd
-        public List<RankData> Ranks = new List<RankData>();
+        public List<Rank> Ranks { get; set; } = new List<Rank>();
     }
 
     public class RankManager : SingletonBase<RankManager>
     {
-        private Dictionary<string, DailyRank> dailyRanks = new Dictionary<string, DailyRank>();
+        private Dictionary<string, DailyRank> dailyRankDic = new Dictionary<string, DailyRank>();
         private string savePath;
 
         private void Awake()
         {
             savePath = Path.Combine(Application.persistentDataPath, "rank.json");
+            Debug.Log($"[RankManager] Save Path: {savePath}");
             LoadRanks();
         }
 
         // 랭크 추가
-        public void AddRank(RankData rank)
+        public void AddRank()
         {
-            string dateKey = rank.Date.ToString("yyyyMMdd");
+            string dailyKey = DateTime.Now.ToString("yyyyMMdd");
 
-            if (!dailyRanks.TryGetValue(dateKey, out var dailyRank))
+            if (!dailyRankDic.TryGetValue(dailyKey, out var dailyRank))
             {
-                dailyRank = new DailyRank { Date = dateKey };
-                dailyRanks[dateKey] = dailyRank;
+                dailyRank = new DailyRank();
+                dailyRankDic[dailyKey] = dailyRank;
             }
 
-            dailyRank.Ranks.Add(new RankData
+            var rank = new Rank
             (
-                rank.ID,
-                rank.PW,
-                rank.Score,
-                rank.Date
-            ));
+                GameManager.Instance.idInputField.text,
+                GameManager.Instance.pwInputField.text,
+                GameManager.Instance.Score
+            );
+
+            // rank is null
+            dailyRank.Ranks.Add(rank);
 
             SaveRanks();
         }
 
-        // 특정 날짜 랭크 조회
-        // public List<RankData> GetRanksByDate(string yyyyMMdd)
-        // {
-        //     if (dailyRanks.TryGetValue(yyyyMMdd, out var dailyRank))
-        //         return dailyRank.Ranks;
-
-        //     return new List<RankData>();
-        // }
-
         // JSON 저장
-        private void SaveRanks()
+        public void SaveRanks()
         {
-            var allRanks = new List<DailyRank>(dailyRanks.Values);
-            string json = JsonUtility.ToJson(new Wrapper<DailyRank> { Items = allRanks }, true);
+            var json = JsonConvert.SerializeObject(dailyRankDic, Formatting.Indented);
             File.WriteAllText(savePath, json);
         }
 
@@ -91,20 +81,17 @@ namespace Manager
                 return;
 
             string json = File.ReadAllText(savePath);
-            var wrapper = JsonUtility.FromJson<Wrapper<DailyRank>>(json);
-
-            dailyRanks.Clear();
-            foreach (var daily in wrapper.Items)
-            {
-                dailyRanks[daily.Date] = daily;
-            }
+            dailyRankDic = JsonConvert.DeserializeObject<Dictionary<string, DailyRank>>(json)
+                           ?? new Dictionary<string, DailyRank>();
         }
-
-        // JsonUtility는 List 직렬화를 직접 지원하지 않으므로 Wrapper 사용
-        [Serializable]
-        private class Wrapper<T>
+        
+        // 특정 날짜 랭크 조회
+        public List<Rank> GetRanksByDate(string yyyyMMdd)
         {
-            public List<T> Items;
+            if (dailyRankDic.TryGetValue(yyyyMMdd, out var dailyRank))
+                return dailyRank.Ranks;
+
+            return  new List<Rank>();
         }
     }
 }

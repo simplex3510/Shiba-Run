@@ -25,27 +25,34 @@ namespace Manager
 
         public float Score { get; private set; } = 0.0f;
 
-        #region Menu UI
-        [Header("Menu UI")]
+        #region Title UI
         public bool IsClickedStartButton { get { return isClickedStartButton; } }
+        [Header("Title UI")]
         [SerializeField, ReadOnlyField] private bool isClickedStartButton = false;
+        [SerializeField] private TMP_InputField verifyIDInputField;
+        [SerializeField] private TMP_InputField verifyPWInputField;
+        [SerializeField] private TMP_Text verifyScore;
+        [SerializeField] private TMP_Text verifyRank;
         #endregion
 
         #region Game UI
         [Header("Game UI")]
         [SerializeField] private TextMeshProUGUI scoreText;
-        [SerializeField] private GameObject titleButton;
+
+        public TMP_InputField idInputField;
+        public TMP_InputField pwInputField;
         #endregion
 
         #region Game State
-        [Header("Game State")]
         public bool IsGameStarted { get { return isGameStarted; } }
         public bool IsGameOver { get { return isGameOver; } }
 
+        [Header("Game State")]
         [SerializeField, ReadOnlyField] private bool isGameOver = false;
         [SerializeField, ReadOnlyField] private bool isGameStarted = false;
         #endregion
 
+        [Header("Game Settings")]
         [SerializeField] private float waitTime = 3.0f;
 
         public PlayerInputActions inputActions;
@@ -111,8 +118,6 @@ namespace Manager
 
             scoreText.text = "Score: 0";
             Score = 0.0f;
-
-            titleButton.SetActive(false);
         }
 
         public async void SetGameOver()
@@ -123,8 +128,6 @@ namespace Manager
             float delayTime = SoundManager.Instance.PlaySFX(AudioClipNames.GameSet);
 
             await Task.Delay((int)(delayTime * 1000));
-
-            titleButton.SetActive(true);
         }
 
         private void QuitGame()
